@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About me
+title: 自我介绍
 subtitle: 山中散人的自留地
 ---
 
