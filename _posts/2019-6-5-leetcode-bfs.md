@@ -1,6 +1,9 @@
 ---
 layout: post
 title: LeetCode专题-广度优先搜索
+tags: [Leetcode]
+bigimg: /img/path.jpg
+comments: true
 ---
 
 ## 429. N-ary Tree Level Order Traversal

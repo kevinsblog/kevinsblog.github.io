@@ -1,6 +1,9 @@
 ---
 layout: post
 title: LeetCode专题-排序应用(二)
+tags: [Leetcode]
+bigimg: /img/path.jpg
+comments: true
 ---
 
 ## 34. Find First and Last Position of Element in Sorted Array

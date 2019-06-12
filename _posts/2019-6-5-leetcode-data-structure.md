@@ -1,6 +1,9 @@
 ---
 layout: post
 title: LeetCode专题-设计数据结构
+tags: [Leetcode]
+bigimg: /img/path.jpg
+comments: true
 ---
 
 ## 428. Serialize and Deserialize N-ary Tree

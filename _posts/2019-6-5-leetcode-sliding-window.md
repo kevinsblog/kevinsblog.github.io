@@ -1,6 +1,9 @@
 ---
 layout: post
 title: LeetCode专题-滑动窗
+tags: [Leetcode]
+bigimg: /img/path.jpg
+comments: true
 ---
 
 ## 424. Longest Repeating Character Replacement

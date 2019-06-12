@@ -1,6 +1,9 @@
 ---
 layout: post
 title: LeetCode专题-深度优先搜索(二)
+tags: [Leetcode]
+bigimg: /img/path.jpg
+comments: true
 ---
 
 ## 目录

@@ -1,6 +1,9 @@
 ---
 layout: post
 title: LeetCode专题-模拟计算
+tags: [Leetcode]
+bigimg: /img/path.jpg
+comments: true
 ---
 
 ## 目录

@@ -1,6 +1,9 @@
 ---
 layout: post
 title: LeetCode专题-数组和矩阵
+tags: [Leetcode]
+bigimg: /img/path.jpg
+comments: true
 ---
 
 ## 目录

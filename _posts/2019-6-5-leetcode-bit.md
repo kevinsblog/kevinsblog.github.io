@@ -1,6 +1,9 @@
 ---
 layout: post
 title: LeetCode专题-位运算
+tags: [Leetcode]
+bigimg: /img/path.jpg
+comments: true
 ---
 
 ## 421. Maximum XOR of Two Numbers in an Array

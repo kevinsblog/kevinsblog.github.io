@@ -1,6 +1,9 @@
 ---
 layout: post
 title: LeetCode专题-哈希表
+tags: [Leetcode]
+bigimg: /img/path.jpg
+comments: true
 ---
 
 ## 423. Reconstruct Original Digits from English

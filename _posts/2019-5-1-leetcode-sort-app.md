@@ -1,9 +1,17 @@
 ---
 layout: post
 title: LeetCode专题-排序应用
+tags: [Leetcode]
+bigimg: /img/path.jpg
+comments: true
 ---
 
-#853. Car Fleet
+**853. Car Fleet**
+**945. Minimum Increment to Make Array Unique**
+**899. Orderly Queue**
+
+# 853. Car Fleet
+
 Medium
 
 N cars are going to the same destination along a one lane road.  The destination is target miles away.
@@ -115,7 +123,8 @@ Runtime: 72 ms, faster than 90.14% of Python3 online submissions for Largest Per
 Memory Usage: 13.9 MB, less than 62.16% of Python3 online submissions for Largest Perimeter Triangle.
 ```
 
-#945. Minimum Increment to Make Array Unique
+# 945. Minimum Increment to Make Array Unique
+
 Medium
 
 Given an array of integers A, a move consists of choosing any A[i], and incrementing it by 1.
@@ -318,7 +327,7 @@ Runtime: 64 ms, faster than 97.07% of Python3 online submissions for Sort Array 
 Memory Usage: 13.8 MB, less than 38.36% of Python3 online submissions for Sort Array By Parity.
 ```
 
-#899. Orderly Queue
+# 899. Orderly Queue
 Hard
 
 A string S of lowercase letters is given.  Then, we may make any number of moves.

@@ -1,6 +1,9 @@
 ---
 layout: post
 title: LeetCode专题-字符串应用
+tags: [Leetcode]
+bigimg: /img/path.jpg
+comments: true
 ---
 
 ## 392. Is Subsequence
