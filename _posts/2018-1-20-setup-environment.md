@@ -1,6 +1,10 @@
 ---
 layout: post
 title: Mac/Linux 配置开发环境
+subtitle: Git
+tags: [Linux]
+bigimg: /img/path.jpg
+comments: true
 ---
 
 **配置开发环境的过程繁琐而易错，每次安装新环境都要花费相当的时间，因此在本文中稍作总结**
