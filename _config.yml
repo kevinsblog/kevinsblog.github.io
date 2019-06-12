@@ -23,13 +23,13 @@ description: 世上本无事，庸人自扰之
 
 # List of links in the navigation bar
 navbar-links:
-  Jian Shu: "https://www.jianshu.com/u/a0839bc8e7b4"
-  About Me: "aboutme"
-  Resources:
+  简书: "https://www.jianshu.com/u/a0839bc8e7b4"
+  个人介绍: "aboutme"
+  资源:
     # - Beautiful Jekyll: "http://deanattali.com/beautiful-jekyll/"
-    - Learn markdown: "http://www.markdowntutorial.com/"
-    - GitHub Pages: "https://kevinsblog.github.com/"
-    - HuaHua Blog: "https://zxi.mytechroad.com/blog/"
+    - Markdown语法学习: "http://www.markdowntutorial.com/"
+    - GitHub主站: "https://kevinsblog.github.com/"
+    - HuaHua的博客: "https://zxi.mytechroad.com/blog/"
   # Author's home: "http://deanattali.com"
 
 # Image to show in the navigation bar - image must be a square (width = height)
