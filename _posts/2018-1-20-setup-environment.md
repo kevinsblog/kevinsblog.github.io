@@ -6,7 +6,6 @@ tags: [Linux]
 bigimg: /img/path.jpg
 comments: true
 ---
-
 **配置开发环境的过程繁琐而易错，每次安装新环境都要花费相当的时间，因此在本文中稍作总结**
 
 # 安装和配置Git服务
@@ -31,7 +30,7 @@ ssh-keygen -t rsa -C "<email>"
 ```
 在GitHub上添加密钥，
 ```
-cat 
+cat id_rsa.pub
 ```
 > 依次点击Account settings（右上角倒数第二个图标） -> SSH Keys -> Add SSH Key，将id_rsa.pub文件中的字符串复制进去，注意字符串中没有换行和空格。
 
