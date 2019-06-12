@@ -1,6 +1,9 @@
 ---
 layout: post
 title: Linux I\O Summary -- Buffered I\O
+tags: [Linux]
+bigimg: /img/path.jpg
+comments: true
 ---
 
 ## Block

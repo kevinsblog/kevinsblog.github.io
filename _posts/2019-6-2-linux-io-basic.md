@@ -1,6 +1,9 @@
 ---
 layout: post
 title: Linux I\O总结 -- 基础概念篇
+tags: [Linux]
+bigimg: /img/path.jpg
+comments: true
 ---
 
 ## 文件描述符

@@ -1,6 +1,9 @@
 ---
 layout: post
 title: Linux ARM嵌入式系统笔记
+tags: [Linux]
+bigimg: /img/path.jpg
+comments: true
 ---
 
 # 嵌入式系统(Embedded System)
