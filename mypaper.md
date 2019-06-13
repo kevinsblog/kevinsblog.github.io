@@ -10,5 +10,5 @@ Zhu G, Gong X, Luo R.
 
 [Research on Spatial temporal Spectrum Occupancy
 Model of Cognitive Radio，认知无线电中频谱占用时空模型
-研究](https://github.com/kevinsblog/kevinsblog.github.io/blob/master/pdf/ResearchonSpatial-temporalSpectrumOccupancyModelal.pdf)
+研究](https://www.researchgate.net/publication/318405797_Research_on_Spatial-temporal_Spectrum_Occupancy_Modelal)
 , 朱耿宇
