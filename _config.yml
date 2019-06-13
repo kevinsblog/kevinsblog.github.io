@@ -24,6 +24,7 @@ description: 世上本无事，庸人自扰之
 # List of links in the navigation bar
 navbar-links:
   简书: "https://www.jianshu.com/u/a0839bc8e7b4"
+  我的学术贡献: "mypaper"
   个人介绍: "aboutme"
   相关资源链接:
     # - Beautiful Jekyll: "http://deanattali.com/beautiful-jekyll/"
