@@ -8,7 +8,13 @@ comments: true
 
 ## 目录
 
-N皇后问题一、二
+[51. N-Queens](#jump51)
+
+[52. N-Queens II](#jump52)
+
+[77. Combinations](#jump77)
+
+<span id="jump51"></span>
 
 ## 51. N-Queens
 
@@ -105,6 +111,7 @@ Details
 Runtime: 8 ms, faster than 92.21% of C++ online submissions for N-Queens.
 Memory Usage: 10.1 MB, less than 66.69% of C++ online submissions for N-Queens.
 ```
+<span id="jump52"></span>
 
 ## 52. N-Queens II
 
@@ -190,4 +197,62 @@ Success
 Details
 Runtime: 0 ms, faster than 100.00% of C++ online submissions for N-Queens II.
 Memory Usage: 8.5 MB, less than 39.40% of C++ online submissions for N-Queens II.
+```
+<span id="jump77"></span>
+
+##77. Combinations
+
+Medium
+
+Given two integers n and k, return all possible combinations of k numbers out of 1 ... n.
+
+```
+Example:
+
+Input: n = 4, k = 2
+Output:
+[
+  [2,4],
+  [3,4],
+  [2,3],
+  [1,2],
+  [1,3],
+  [1,4],
+]
+```
+
+题目大意：从1-n中找k个数形成组合，要求列出所有可能的组合。
+
+解题思路：用DFS穷举所有的组合，保存符合条件的。
+
+```c++
+class Solution {
+public:
+    void combineDFS(int start, const int k, const int n, vector<int> &path, vector<vector<int>> &ans){
+        if(path.size() == k){
+            ans.push_back(path);
+            return;
+        }
+
+        for(int i = start; i <= n; i++){
+            path.push_back(i);
+            combineDFS(i + 1, k, n, path, ans);
+            path.pop_back();
+        }
+    }    
+    
+    vector<vector<int>> combine(int n, int k) {
+        vector<vector<int>> ans;
+        vector<int> path;
+        combineDFS(1, k, n, path, ans);
+        return move(ans);        
+    }
+};
+```
+测试一下，
+```
+Success
+Details
+Runtime: 84 ms, faster than 70.48% of C++ online submissions for Combinations.
+Memory Usage: 11.8 MB, less than 67.96% of C++ online submissions for Combinations.
 ```

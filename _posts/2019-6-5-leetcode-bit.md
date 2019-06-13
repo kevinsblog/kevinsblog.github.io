@@ -6,6 +6,14 @@ bigimg: /img/path.jpg
 comments: true
 ---
 
+## 目录
+
+[421. Maximum XOR of Two Numbers in an Array](#jump421)
+
+[401. Binary Watch](#jump401)
+
+<span id="jump421"></span>
+
 ## 421. Maximum XOR of Two Numbers in an Array
 
 Medium
@@ -75,4 +83,101 @@ Success
 Details
 Runtime: 108 ms, faster than 50.91% of C++ online submissions for Maximum XOR of Two Numbers in an Array.
 Memory Usage: 36.7 MB, less than 31.07% of C++ online submissions for Maximum XOR of Two Numbers in an Array.
+```
+
+<span id="jump401"></span>
+
+401. Binary Watch
+Easy
+
+A binary watch has 4 LEDs on the top which represent the hours (0-11), and the 6 LEDs on the bottom represent the minutes (0-59).
+
+Each LED represents a zero or one, with the least significant bit on the right.
+
+![For example, the above binary watch reads "3:25".](https://upload.wikimedia.org/wikipedia/commons/8/8b/Binary_clock_samui_moon.jpg)
+
+Given a non-negative integer n which represents the number of LEDs that are currently on, return all possible times the watch could represent.
+
+```
+Example:
+
+Input: n = 1
+Return: ["1:00", "2:00", "4:00", "8:00", "0:01", "0:02", "0:04", "0:08", "0:16", "0:32"]
+```
+
+Note:
+
+    The order of output does not matter.
+    The hour must not contain a leading zero, for example "01:00" is not valid, it should be "1:00".
+    The minute must be consist of two digits and may contain a leading zero, for example "10:2" is not valid, it should be "10:02".
+
+
+题目大意：有一个用二进制位LED表示时：分的手表，要求列出有num个位LED亮时，可能的时间。
+
+解题思路：从惯性思维的角度，这道题可以用DFS做，但是用DFS做，二进制转时间字符串需要花费很多时间和空间，反而不如直接穷举所有可能的时间好。
+
+DFS解法
+```c++
+const int N = 10;
+void readBinaryWatchDFS(int n, int start, bitset<N> &bits, vector<bitset<N>> &ans){
+    if(start == N || n == 0){
+        if(n == 0){
+            ans.push_back(bits);
+        }
+        return;
+    }
+
+    for(int i = start; i < N; i++){
+        bits[i] = true;
+        readBinaryWatchDFS(n-1, i+1, bits, ans);
+        bits[i] = false;
+    }
+}
+
+vector<string> readBinaryWatch(int num) {
+    string init(N, '0');
+    bitset<N> bits(init);
+    vector<bitset<N>> bits_ans;
+    vector<string> ans;
+    readBinaryWatchDFS(num, 0, bits, bits_ans);
+    for(auto & bits : bits_ans){
+        string s_bits = bits.to_string();
+        bitset<4> hour_bit(s_bits.substr(0, 4)), 
+                  min_bit(s_bits.substr(4, 6));
+        unsigned long hour = hour_bit.to_ulong(),
+                 min = min_bit.to_ulong();
+        string s_hour = hour < 10 ? '0' + to_string(hour) : to_string(hour),
+               s_min = min < 10 ? '0' + to_string(min) : to_string(min);
+        ans.push_back(s_hour + ':' + s_min);
+    }
+    return move(ans);
+}
+```
+用上面的DFS解法在大数据集合会超时无法完成。
+
+暴力解法
+```c++
+class Solution {
+public:
+    vector<string> readBinaryWatch(int num) {
+        vector<string> ans;
+        for(unsigned long h = 0; h < 12; h++){
+            for(unsigned long m = 0; m < 60; m++){
+                bitset<4> hour(h);
+                bitset<6> min(m);
+                if(hour.count() + min.count() == num){
+                    ans.push_back(to_string(h) + ":" + (m < 10 ? '0' + to_string(m) : to_string(m)));
+                }
+            }
+        }
+        return move(ans);        
+    }
+};
+```
+测试效果，
+```
+Success
+Details
+Runtime: 4 ms, faster than 86.95% of C++ online submissions for Binary Watch.
+Memory Usage: 8.6 MB, less than 68.73% of C++ online submissions for Binary Watch.
 ```

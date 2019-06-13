@@ -8,9 +8,15 @@ comments: true
 
 ## 目录
 
-48. Rotate Image
-218. The Skyline Problem
-56. Merge Intervals
+[48. Rotate Image](#jump48)
+
+[218. The Skyline Problem](#jump218)
+
+[56. Merge Intervals](#jump56)
+
+[73. Set Matrix Zeroes](#jump73)
+
+<span id="jump48"></span>
 
 ## 48. Rotate Image
 
@@ -93,6 +99,7 @@ Details
 Runtime: 4 ms, faster than 94.67% of C++ online submissions for Rotate Image.
 Memory Usage: 9 MB, less than 71.33% of C++ online submissions for Rotate Image.
 ```
+<span id="jump218">Medium</span>
 
 ## 218. The Skyline Problem
 
@@ -164,6 +171,7 @@ Expected
 Last executed input (Runtime error)
 [[0,2147483647,2147483647]]
 ```
+<span id="jump56"></span>
 
 ## 56. Merge Intervals
 
@@ -227,4 +235,94 @@ Success
 Details
 Runtime: 16 ms, faster than 78.11% of C++ online submissions for Merge Intervals.
 Memory Usage: 12.6 MB, less than 13.42% of C++ online submissions for Merge Intervals.
+```
+<span id="jump73"></span>
+
+## 73. Set Matrix Zeroes
+
+Medium
+
+Given a m x n matrix, if an element is 0, set its entire row and column to 0. Do it in-place.
+
+```
+Example 1:
+
+Input: 
+[
+  [1,1,1],
+  [1,0,1],
+  [1,1,1]
+]
+Output: 
+[
+  [1,0,1],
+  [0,0,0],
+  [1,0,1]
+]
+
+Example 2:
+
+Input: 
+[
+  [0,1,2,0],
+  [3,4,5,2],
+  [1,3,1,5]
+]
+Output: 
+[
+  [0,0,0,0],
+  [0,4,5,0],
+  [0,3,1,0]
+]
+```
+
+Follow up:
+
+    A straight forward solution using O(mn) space is probably a bad idea.
+    A simple improvement uses O(m + n) space, but still not the best solution.
+    Could you devise a constant space solution?
+
+题目大意：处理一个矩阵，要求将存在0的矩阵行和矩阵列置零。
+
+解题思路：题目对于使用的内存空间有要求，因此用两个个数组分别记录矩阵的某一行或者列存在零元素，空间复杂度为O(m+n)，时间复杂度为O(m*n)。
+
+```c++
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        int m = matrix.size();
+        if(m <= 0)
+            return;
+        int n = matrix[0].size();
+        vector<bool> rows(m, false);
+        vector<bool> cols(n, false);
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(rows[i] && cols[j]){
+                    continue;
+                }
+                //set flag if zero exist in row i and col j
+                if(matrix[i][j] == 0){
+                    rows[i] = cols[j] = true;
+                }
+            }
+        }
+
+        //set matrix ele as 0 according to flags
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(rows[i] || cols[j]){
+                    matrix[i][j] = 0;
+                }
+            }
+        }        
+    }
+};
+```
+测试一下，
+```
+Success
+Details
+Runtime: 48 ms, faster than 85.44% of C++ online submissions for Set Matrix Zeroes.
+Memory Usage: 11.6 MB, less than 20.86% of C++ online submissions for Set Matrix Zeroes.
 ```
