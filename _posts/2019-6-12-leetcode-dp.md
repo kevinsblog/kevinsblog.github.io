@@ -9,15 +9,18 @@ comments: true
 ## 目录
 
 [55. Jump Game](#jump55)
+
 [45. Jump Game II](#jump45)
+
 [62. Unique Paths](#jump62)
+
 [63. Unique Paths II](#jump63)
+
 [64. Minimum Path Sum](#jump64)
 
+<span id="jump55">Medium</span>
 
 ## 55. Jump Game
-
-<span id="jump55">Medium</span>
 
 Given an array of non-negative integers, you are initially positioned at the first index of the array.
 
@@ -285,8 +288,8 @@ public:
     }    
 };
 ```
-
 <span id="jump64"></span>
+
 ## 64. Minimum Path Sum
 
 Medium
@@ -305,4 +308,48 @@ Input:
 ]
 Output: 7
 Explanation: Because the path 1→3→1→1→1 minimizes the sum.
+```
+
+题目大意：在一个棋盘中，从左上角出发到右下角，路过每一个棋盘格子都有一定的开销，要求找到一条路，使得到达终点的开销最小。
+
+解题思路：这一题和62题的思路非常相似，只是动态规划的目标变成了路径和。
+
+```c++
+class Solution {
+public:
+    int minPathSum(vector<vector<int>>& grid) {
+        int row = grid.size();
+        if(row <= 0)
+            return 0;
+        int col = grid[0].size();
+
+        vector<vector<int>> costs(row, vector<int>(col, 0));
+        costs[0][0] = grid[0][0];
+        //first column
+        for(int i = 1; i < row; i++){
+            costs[i][0] = grid[i][0] + costs[i-1][0];
+        }
+
+        //first row
+        for(int j = 1; j < col; j++){
+            costs[0][j] = grid[0][j] + costs[0][j-1];
+        }
+
+        //traversal the rest cells
+        for(int i = 1; i < row; i++){
+            for(int j = 1; j < col; j++){
+                costs[i][j] = grid[i][j] + min(costs[i-1][j], costs[i][j-1]);
+            }
+        }
+
+        return costs[row-1][col-1];        
+    }
+};
+```
+测试一下，
+```
+Success
+Details
+Runtime: 12 ms, faster than 81.56% of C++ online submissions for Minimum Path Sum.
+Memory Usage: 11 MB, less than 31.72% of C++ online submissions for Minimum Path Sum.
 ```
