@@ -8,17 +8,16 @@ comments: true
 
 ## 目录
 
-55. Jump Game
+[55. Jump Game](#jump55)
 45. Jump Game II
 62. Unique Paths
 63. Unique Paths II
 64. Minimum Path Sum
 
-<span id="jump">Hello World</span>
 
 ## 55. Jump Game
 
-Medium
+<span id="jump55">Medium</span>
 
 Given an array of non-negative integers, you are initially positioned at the first index of the array.
 
@@ -303,4 +302,3 @@ Input:
 Output: 7
 Explanation: Because the path 1→3→1→1→1 minimizes the sum.
 ```
-[End](#jump)
