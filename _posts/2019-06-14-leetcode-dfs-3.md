@@ -30,11 +30,10 @@ board =
   ['S','F','C','S'],
   ['A','D','E','E']
 ]
-```
-
 Given word = "ABCCED", return true.
 Given word = "SEE", return true.
 Given word = "ABCB", return false.
+```
 
 题目大意：给出一个字母矩阵和一个单词，要求判断在矩阵中是否存在一条路径，路径字母的组合是这个单词。
 
@@ -50,7 +49,7 @@ public:
         }
 
         //search next character in four neighbor
-        int offset[4][2] = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
+        int offset[4][2] = { {-1, 0}, {0, -1}, {1, 0}, {0, 1} };
         for(int i = 0; i < 4; i++){
             int x = path.back().first + offset[i][0],
                 y = path.back().second + offset[i][1];
