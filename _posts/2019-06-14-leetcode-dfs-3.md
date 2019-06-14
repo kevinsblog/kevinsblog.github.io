@@ -144,7 +144,7 @@ public:
             return true;
         }
 
-        int offset[4][2] = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
+        int offset[4][2] = { {-1, 0}, {0, -1}, {1, 0}, {0, 1} };
         for(int i = 0; i < 4; i++){
             int x = path.back().first + offset[i][0],
                 y = path.back().second + offset[i][1];
