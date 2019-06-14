@@ -59,7 +59,7 @@ public:
             res.push_back(p->str);
             p->str.clear();
         }
-        int d[][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        int d[][2] = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
         visit[i][j] = true;
         for (auto &a : d) {
             int nx = a[0] + i, ny = a[1] + j;
