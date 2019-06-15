@@ -1,6 +1,6 @@
 ---
 layout: post
-title: LeetCode专题-前缀表达树(三)
+title: LeetCode专题-前缀表达树
 tags: [Leetcode]
 bigimg: /img/path.jpg
 comments: true
@@ -12,7 +12,7 @@ comments: true
 
 # 212. Word Search II
 
-题目大意：[深度优先搜索(三)]()
+题目大意：[深度优先搜索(三)](https://kevinsblog.github.io/2019-06-14-leetcode-dfs-3/)
 
 解题思路：前缀表达式
 
