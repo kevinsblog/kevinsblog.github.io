@@ -12,6 +12,8 @@ comments: true
 
 [401. Binary Watch](#jump401)
 
+[89. Gray Code](#jump89)
+
 <span id="jump421"></span>
 
 ## 421. Maximum XOR of Two Numbers in an Array
@@ -180,4 +182,79 @@ Success
 Details
 Runtime: 4 ms, faster than 86.95% of C++ online submissions for Binary Watch.
 Memory Usage: 8.6 MB, less than 68.73% of C++ online submissions for Binary Watch.
+```
+<span id="jump89"></span>
+
+# 89. Gray Code
+
+Medium
+
+The gray code is a binary numeral system where two successive values differ in only one bit.
+
+Given a non-negative integer n representing the total number of bits in the code, print the sequence of gray code. A gray code sequence must begin with 0.
+
+```
+Example 1:
+
+Input: 2
+Output: [0,1,3,2]
+Explanation:
+00 - 0
+01 - 1
+11 - 3
+10 - 2
+
+For a given n, a gray code sequence may not be uniquely defined.
+For example, [0,2,3,1] is also a valid gray code sequence.
+
+00 - 0
+10 - 2
+11 - 3
+01 - 1
+
+Example 2:
+
+Input: 0
+Output: [0]
+Explanation: We define the gray code sequence to begin with 0.
+             A gray code sequence of n has size = 2n, which for n = 0 the size is 20 = 1.
+             Therefore, for n = 0 the gray code sequence is [0].
+
+```
+
+题目大意：格雷码据说是为了通信时避免出错而产生的，在每次+1时只变化一位。要求将拥有n位的格雷码输出。
+
+解题思路：新格雷码是在旧格雷码的基础上产生的，从第一位开始，每次在原有格雷码的基础上，将第i位设为1，得到新码。
+
+```c++
+class Solution {
+public:
+    vector<int> grayCode(int n) {
+        vector<int> ans = {0};
+        // each loop generate code with i bit 1
+        for(int i = 0; i < n; i++){
+            int len = ans.size(); //new code would be generated based on previous code
+            /*
+             e.g.  '0000' -> '0001'  (set 1 at 1st bit)
+                   '0000', '0001' -> '0010', '0011' (set 1 at 2nd bit)
+                   '0000', '0001','0010', '0011' ->
+                        '0100', '0101', '0110', '0111' (set 1 at 3rd bit)
+                   ....
+                   totally
+            */
+            for(int j = len - 1; j >= 0; j--){
+                // generate new code with one bit set on old code
+                ans.push_back(ans[j] | 1 << i);
+            }
+        }
+        return move(ans);        
+    }
+};
+```
+测试一下，
+```
+Success
+Details
+Runtime: 4 ms, faster than 93.54% of C++ online submissions for Gray Code.
+Memory Usage: 8.7 MB, less than 39.76% of C++ online submissions for Gray Code.
 ```

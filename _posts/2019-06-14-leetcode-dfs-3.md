@@ -12,6 +12,10 @@ comments: true
 
 [212. Word Search II](#jump212)
 
+[93. Restore IP Addresses](#jump93)
+
+[91. Decode Ways](#jump91)
+
 <span id="jump79">Medium</span>
 
 #79. Word Search
@@ -200,4 +204,158 @@ Details
 Last executed input
 [["a","a","a","a"],["a","a","a","a"],["a","a","a","a"],["a","a","a","a"],["b","c","d","e"],["f","g","h","i"],["j","k","l","m"],["n","o","p","q"],["r","s","t","u"],["v","w","x","y"],["z","z","z","z"]]
 ["aaaaaaaaaaaaaaaa","aaaaaaaaaaaaaaab",....
+```
+<span id="jump93">Medium</span>
+
+# 93. Restore IP Addresses
+
+Medium
+
+Given a string containing only digits, restore it by returning all possible valid IP address combinations.
+
+```
+Example:
+
+Input: "25525511135"
+Output: ["255.255.11.135", "255.255.111.35"]
+```
+
+题目大意：一个字符串，包含一个ip地址，要求将ip地址解析出来。
+
+解题思路：用dfs，比较麻烦的是，测试用例千奇百怪，因此我们需要进行很多剪枝，太长的或者太短的ip地址不合法，连续0需要剪枝。
+
+```c++
+class Solution {
+public:
+    void restoreIpAddressesDFS(const string &s, int start, vector<int> &path, vector<string> &ans){
+        if(start == s.size()){
+            if(path.size() == 4){
+                string ip;
+                for(int i = 0; i < path.size(); i++){
+                    ip += to_string(path[i]);
+                    if(i != path.size() - 1)
+                        ip += ".";
+                }
+                ans.push_back(ip);
+            }
+            return;
+        }
+
+        //quit if the remain string is too short or too long
+        if(s.size() - start < 4 - path.size())
+            return;
+
+        if(s.size() - start > (4 - path.size())*3)
+            return;
+
+        int num = 0;
+        //one num has at most 3 bits
+        for(int i = start; i < start + 3; i++){
+            if(i >= s.size()) //quit if reach the end
+                break;
+
+            int res = num*10 + (s[i] - '0');
+            if(res > 255 || res < 0) //quit if num invalid
+                break;
+
+            path.push_back(res);
+            restoreIpAddressesDFS(s, i + 1, path, ans);
+            path.pop_back();
+            num = res;
+            
+            // no more loop if num is zero
+            if(num == 0)
+                break;
+        }
+    }
+
+    vector<string> restoreIpAddresses(string s) {
+        vector<string> ans;
+        vector<int> ip;
+        restoreIpAddressesDFS(s, 0, ip, ans);
+        return move(ans);
+    }
+};
+```
+测试一下，
+```
+Success
+Details
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Restore IP Addresses.
+Memory Usage: 8.8 MB, less than 30.52% of C++ online submissions for Restore IP Addresses.
+```
+<span id="jump91">Medium</span>
+
+# 91. Decode Ways
+
+Medium
+
+A message containing letters from A-Z is being encoded to numbers using the following mapping:
+
+'A' -> 1
+'B' -> 2
+...
+'Z' -> 26
+
+Given a non-empty string containing only digits, determine the total number of ways to decode it.
+```
+Example 1:
+
+Input: "12"
+Output: 2
+Explanation: It could be decoded as "AB" (1 2) or "L" (12).
+
+Example 2:
+
+Input: "226"
+Output: 3
+Explanation: It could be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
+```
+
+题目大意：一列数字，要将它解析成A-Z组成的字符串。
+
+解题思路：用DFS，但是面对长测试集合无法通过。
+
+```c++
+class Solution {
+public:
+    void numDecodingsDFS(const string &s, int start, vector<char> &path, vector<vector<char>> &ans){
+        if(start == s.size()){
+            ans.push_back(path);
+            return;
+        }
+
+        int num = 0;
+        for(int i = start; i < start + 2; i++){
+            int res = num*10 + s[i] - '0';
+            if(res < 1 || res > 26){
+                break;
+            }
+
+            path.push_back('A' + res);
+            numDecodingsDFS(s, i+1, path, ans);
+            path.pop_back();
+
+            num = res;
+            if(num == 0){
+                break;
+            }
+        }
+    }
+
+    int numDecodings(string s) {
+        vector<vector<char>> ans;
+        vector<char> path;
+        numDecodingsDFS(s, 0, path, ans);
+        return ans.size();
+    }
+};
+```
+测试一下
+```
+Time Limit Exceeded
+Details
+Playground Debug
+Last executed input
+"9371597631128776948387197132267188677349946742344217846154932859125134924241649584251978418763151253"
 ```

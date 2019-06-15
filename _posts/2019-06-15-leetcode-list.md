@@ -10,6 +10,8 @@ comments: true
 
 [82. Remove Duplicates from Sorted List II](#jump82)
 
+[143. Reorder List](#jump143)
+
 <span id="jump82"></span>
 
 # 82. Remove Duplicates from Sorted List II
@@ -82,3 +84,80 @@ Details
 Runtime: 8 ms, faster than 93.29% of C++ online submissions for Remove Duplicates from Sorted List II.
 Memory Usage: 10.1 MB, less than 5.03% of C++ online submissions for Remove Duplicates from Sorted List II.
 ```
+<span id="jump143"></span>
+
+# 143. Reorder List
+
+Medium
+
+Given a singly linked list L: L0→L1→…→Ln-1→Ln,
+reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
+
+You may not modify the values in the list's nodes, only nodes itself may be changed.
+
+```
+Example 1:
+
+Given 1->2->3->4, reorder it to 1->4->2->3.
+
+Example 2:
+
+Given 1->2->3->4->5, reorder it to 1->5->2->4->3.
+```
+
+题目大意：对一个链表，将它的后半部分逆序后插入前半部分得到新链表。
+
+解题思路：用快慢指针将链表分成两部分，将后半部分逆序，再重新组合链表。
+
+```c++
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        //inline function to reverse list
+        auto reverseList = [](ListNode* head){
+            ListNode *prev = nullptr, *curr = head, *next = nullptr;
+            while(curr != nullptr){
+                next = curr->next;
+                curr->next = prev;
+                prev = curr;
+                curr = next;
+            }
+            return prev;
+        };    
+
+        //no need to reorder if list has less then 3 nodes
+        if(head == nullptr || head->next == nullptr || head->next->next == nullptr){
+            return;
+        }
+        
+        //find the mid node
+        ListNode *fast = head, *slow = head;
+        while(fast->next != nullptr && fast->next->next != nullptr){
+            fast = fast->next->next;
+            slow = slow->next;
+        }
+
+        //split the list into two
+        auto mid = slow->next;
+        slow->next = nullptr;
+        mid = reverseList(mid); //reverse the second half
+        
+        //combine the two lists
+        while(head && mid){
+            auto next = head->next;
+            head->next = mid;
+            mid = mid->next;
+            head->next->next = next;
+            head = next;
+        }        
+    }
+};
+```
+测试一下，
+```
+Success
+Details
+Runtime: 44 ms, faster than 98.09% of C++ online submissions for Reorder List.
+Memory Usage: 12.2 MB, less than 54.52% of C++ online submissions for Reorder List.
+```
+
