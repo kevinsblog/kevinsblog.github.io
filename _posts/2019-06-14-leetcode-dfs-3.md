@@ -20,7 +20,7 @@ comments: true
 
 <span id="jump79"></span>
 
-#79. Word Search
+# 79. Word Search
 
 Medium
 

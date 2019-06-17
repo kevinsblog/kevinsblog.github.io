@@ -46,7 +46,7 @@ Note:
 
 解题思路：广度优先搜索。
 
-```c++
+{% highlight c++ linenos %}
 /*
 // Definition for a Node.
 class Node {
@@ -95,7 +95,7 @@ public:
         return move(ans);       
     }
 };
-```
+{% endhighlight %}
 测试一下，
 
 ```
@@ -152,7 +152,7 @@ Explanation: The endWord "cog" is not in wordList, therefore no possible transfo
 
 解题思路：用BFS，搜索单词集合中所有可用的单词，记录完成搜索所需要的层数。
 
-```c++
+{% highlight c++ linenos %}
 class Solution {
 public:
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
@@ -198,7 +198,7 @@ public:
         return 0; //if it's impossible to find a ladder
     }
 };
-```
+{% endhighlight %}
 测试一下，
 ```
 Success
@@ -240,7 +240,7 @@ Surrounded regions shouldn’t be on the border, which means that any 'O' on the
 
 解题思路：用BFS，先找到边界上没有被包围的‘O’，搜索出邻接的‘O’，标记出来。将没有被搜索出来的'O'全部翻转。
 
-```c++
+{% highlight c++ linenos %}
 class Solution {
 public:
     void solve(vector<vector<char>>& board) {
@@ -310,7 +310,7 @@ public:
         return;        
     }
 };
-```
+{% endhighlight %}
 测试一下，
 ```
 Success
@@ -352,7 +352,7 @@ Output: 3
 
 解题思路：用BFS，测出和标记岛屿的个数，一个岛屿的所有陆地可以在一次BFS中得到。
 
-```c++
+{% highlight c++ linenos %}
 class Solution {
 public:
     int numIslands(vector<vector<char>>& grid) {
@@ -413,7 +413,7 @@ public:
         return steps;       
     }
 };
-```
+{% endhighlight %}
 测试一下，
 ```
 Success
