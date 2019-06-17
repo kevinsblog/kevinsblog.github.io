@@ -14,6 +14,8 @@ comments: true
 
 [130. Surrounded Regions](#jump130)
 
+[200. Number of Islands](#jump200)
+
 <span id="jump429">Medium</span>
 
 # 429. N-ary Tree Level Order Traversal
@@ -274,7 +276,7 @@ public:
         }
 
         //search the four direction
-        pair<int, int> offset[4] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        pair<int, int> offset[4] = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
         while(!Q.empty()){
             int num = Q.size();
             while(num-- > 0){
@@ -315,4 +317,107 @@ Success
 Details
 Runtime: 32 ms, faster than 80.98% of C++ online submissions for Surrounded Regions.
 Memory Usage: 14.2 MB, less than 67.53% of C++ online submissions for Surrounded Regions.
+```
+<span id="jump200">Medium</span>
+
+# 200. Number of Islands
+
+Medium
+
+Given a 2d grid map of '1's (land) and '0's (water), count the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+
+```
+Example 1:
+
+Input:
+11110
+11010
+11000
+00000
+
+Output: 1
+
+Example 2:
+
+Input:
+11000
+11000
+00100
+00011
+
+Output: 3
+```
+
+题目大意：矩阵中‘0’为海洋，‘1’为陆地，相连的陆地组成岛屿，要求求出岛屿的个数。
+
+解题思路：用BFS，测出和标记岛屿的个数，一个岛屿的所有陆地可以在一次BFS中得到。
+
+```c++
+class Solution {
+public:
+    int numIslands(vector<vector<char>>& grid) {
+        int m = grid.size();
+        if(m == 0){
+            return 0;
+        }
+        int n = grid[0].size();
+
+        //plot grid with the index of island
+        const pair<int, int> offset[4] = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+        auto plotGrid = [&](int row, int col, int steps){
+            queue<pair<int, int>> Q;
+            Q.push(pair<int, int>(row, col));
+            while(!Q.empty()){
+                int num = Q.size();
+                while(num-- > 0){
+                    pair<int, int> pos = Q.front();
+                    Q.pop();
+                    for(int i = 0; i < 4; i++){
+                        int x = pos.first + offset[i].first,
+                            y = pos.second + offset[i].second;
+                        if(x < 0 || x >= m || y < 0 || y >= n)
+                            continue;
+
+                        if(grid[x][y] != '*')
+                            continue;
+
+                        grid[x][y] = steps + '1';
+                        Q.push(pair<int, int>(x, y));
+                    }
+                }
+            }
+        };
+
+        //mark all the land
+        for(auto & row : grid){
+            for(auto & cell : row){
+                if(cell == '1'){
+                    cell = '*';
+                }
+            }
+        }
+
+        int steps = 0;
+        //keep search until no more land is remain un-markded
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(grid[i][j] != '*')
+                    continue;
+
+                //mark all lands of one island
+                plotGrid(i, j, steps);
+                steps++;
+            }
+        }
+
+        return steps;       
+    }
+};
+```
+测试一下，
+```
+Success
+Details
+Runtime: 16 ms, faster than 84.06% of C++ online submissions for Number of Islands.
+Memory Usage: 11.4 MB, less than 24.75% of C++ online submissions for Number of Islands.
 ```
