@@ -17,14 +17,14 @@ baseurl: ""
 title: 山中散人的博客
 
 # Short description of your site
-description: 世上本无事，庸人自扰之
+description: 本是山中闲散人，只因美酒留人间
 
 # --- Navigation bar options --- #
 
 # List of links in the navigation bar
 navbar-links:
   简书: "https://www.jianshu.com/u/a0839bc8e7b4"
-  我的学术成果: "mypaper"
+  学术成果: "mypaper"
   个人介绍: "aboutme"
   相关资源链接:
     # - Beautiful Jekyll: "http://deanattali.com/beautiful-jekyll/"

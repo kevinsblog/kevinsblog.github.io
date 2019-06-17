@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 我的学术成果
+title: 学术成果
 subtitle: 论文
 ---
 
