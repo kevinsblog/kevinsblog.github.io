@@ -16,6 +16,8 @@ comments: true
 
 [91. Decode Ways](#jump91)
 
+[131. Palindrome Partitioning](#jump131)
+
 <span id="jump79">Medium</span>
 
 #79. Word Search
@@ -358,4 +360,78 @@ Details
 Playground Debug
 Last executed input
 "9371597631128776948387197132267188677349946742344217846154932859125134924241649584251978418763151253"
+```
+<span id="jump131">Medium</span>
+
+# 131. Palindrome Partitioning
+
+Medium
+
+Given a string s, partition s such that every substring of the partition is a palindrome.
+
+Return all possible palindrome partitioning of s.
+
+```
+Example:
+
+Input: "aab"
+Output:
+[
+  ["aa","b"],
+  ["a","a","b"]
+]
+```
+{: .box-note}
+**题目大意:** 将一个字符串划分成一系列子字符串，每个子字符串都是回文。
+
+{: .box-note}
+**解题思路:** 用DFS，搜索所有符合条件的路径。
+
+{% highlight c++ linenos %}
+class Solution {
+public:
+    void partitionDFS(const string &s, int start, vector<string> &path,vector<vector<string>> &ans){
+        //judge if word[start:end] is a valid palindrome
+        auto isPalindrome = [](const string &word, int start, int end){
+            while(start < end){
+                if(word[start] != word[end])
+                    return false;
+                start++;
+                end--;
+            }
+            return true;
+        };
+
+        //parition done
+        if(start == s.size()){
+            ans.push_back(path);
+            return;
+        }
+
+        for(int i = start; i < s.size(); i++){
+            //skip if current parition is not palindrome
+            if(!isPalindrome(s, start, i))
+                continue;
+
+            path.push_back(s.substr(start, i - start + 1));
+            partitionDFS(s, i + 1, path, ans); //search for following sub str
+            path.pop_back();
+        }
+    }
+
+    vector<vector<string>> partition(string s) {
+        vector<vector<string>> ans;
+        vector<string> path;
+        partitionDFS(s, 0, path, ans);
+        return move(ans);
+    }        
+};
+{% endhighlight %}
+
+测试一下，
+```
+Success
+Details
+Runtime: 8 ms, faster than 99.48% of C++ online submissions for Palindrome Partitioning.
+Memory Usage: 12.6 MB, less than 88.25% of C++ online submissions for Palindrome Partitioning.
 ```
