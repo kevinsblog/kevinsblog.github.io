@@ -18,7 +18,7 @@ comments: true
 
 [131. Palindrome Partitioning](#jump131)
 
-<span id="jump79">Medium</span>
+<span id="jump79"></span>
 
 #79. Word Search
 
@@ -109,7 +109,7 @@ Details
 Runtime: 72 ms, faster than 51.46% of C++ online submissions for Word Search.
 Memory Usage: 14.5 MB, less than 57.58% of C++ online submissions for Word Search.
 ```
-<span id="jump212">Medium</span>
+<span id="jump212"></span>
 
 # 212. Word Search II
 
@@ -207,7 +207,7 @@ Last executed input
 [["a","a","a","a"],["a","a","a","a"],["a","a","a","a"],["a","a","a","a"],["b","c","d","e"],["f","g","h","i"],["j","k","l","m"],["n","o","p","q"],["r","s","t","u"],["v","w","x","y"],["z","z","z","z"]]
 ["aaaaaaaaaaaaaaaa","aaaaaaaaaaaaaaab",....
 ```
-<span id="jump93">Medium</span>
+<span id="jump93"></span>
 
 # 93. Restore IP Addresses
 
@@ -286,7 +286,7 @@ Details
 Runtime: 0 ms, faster than 100.00% of C++ online submissions for Restore IP Addresses.
 Memory Usage: 8.8 MB, less than 30.52% of C++ online submissions for Restore IP Addresses.
 ```
-<span id="jump91">Medium</span>
+<span id="jump91"></span>
 
 # 91. Decode Ways
 
@@ -361,7 +361,7 @@ Playground Debug
 Last executed input
 "9371597631128776948387197132267188677349946742344217846154932859125134924241649584251978418763151253"
 ```
-<span id="jump131">Medium</span>
+<span id="jump131"></span>
 
 # 131. Palindrome Partitioning
 
