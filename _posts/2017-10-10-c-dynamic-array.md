@@ -1,6 +1,7 @@
 ---
 layout: post
 title: C实现的动态数组
+tags: [Data Structures][Algorithm]
 ---
 
 #### `关于动态数组`
