@@ -6,15 +6,8 @@ bigimg: /img/path.jpg
 comments: true
 ---
 
-## 目录
-
-[51. N-Queens](#jump51)
-
-[52. N-Queens II](#jump52)
-
-[77. Combinations](#jump77)
-
-<span id="jump51"></span>
+* toc
+{:toc}
 
 ## 51. N-Queens
 

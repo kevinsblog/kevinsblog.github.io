@@ -6,6 +6,9 @@ bigimg: /img/path.jpg
 comments: true
 ---
 
+* toc
+{:toc}
+
 ## 424. Longest Repeating Character Replacement
 
 Medium

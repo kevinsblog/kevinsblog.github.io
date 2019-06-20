@@ -6,15 +6,8 @@ bigimg: /img/path.jpg
 comments: true
 ---
 
-## 目录
-
-[421. Maximum XOR of Two Numbers in an Array](#jump421)
-
-[401. Binary Watch](#jump401)
-
-[89. Gray Code](#jump89)
-
-<span id="jump421"></span>
+* toc
+{:toc}
 
 ## 421. Maximum XOR of Two Numbers in an Array
 

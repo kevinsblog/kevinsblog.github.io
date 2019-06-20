@@ -6,19 +6,8 @@ bigimg: /img/path.jpg
 comments: true
 ---
 
-# 目录
-
-[79. Word Search](#jump79)
-
-[212. Word Search II](#jump212)
-
-[93. Restore IP Addresses](#jump93)
-
-[91. Decode Ways](#jump91)
-
-[131. Palindrome Partitioning](#jump131)
-
-<span id="jump79"></span>
+* toc
+{:toc}
 
 # 79. Word Search
 

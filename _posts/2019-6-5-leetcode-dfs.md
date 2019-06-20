@@ -6,10 +6,8 @@ bigimg: /img/path.jpg
 comments: true
 ---
 
-## 目录
-425. Word Squares
-39. Combination Sum
-40. Combination Sum II
+* toc
+{:toc}
 
 ## 425. Word Squares
 

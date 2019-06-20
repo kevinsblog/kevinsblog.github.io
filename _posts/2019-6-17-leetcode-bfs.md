@@ -6,15 +6,8 @@ bigimg: /img/path.jpg
 comments: true
 ---
 
-# 目录
-
-[429. N-ary Tree Level Order Traversal](#jump429)
-
-[127. Word Ladder](#jump127)
-
-[130. Surrounded Regions](#jump130)
-
-[200. Number of Islands](#jump200)
+* toc
+{:toc}
 
 <span id="jump429">Medium</span>
 

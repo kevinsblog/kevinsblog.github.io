@@ -6,6 +6,9 @@ bigimg: /img/path.jpg
 comments: true
 ---
 
+* toc
+{:toc}
+
 # 嵌入式系统(Embedded System)
 
 嵌入式系统可以理解为为特定设备服务的软件，硬件可裁剪的计算机系统，ARM(Advanced RISC Machines)嵌入式系统是其中有代表性的体系结构。

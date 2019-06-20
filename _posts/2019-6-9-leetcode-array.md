@@ -6,17 +6,8 @@ bigimg: /img/path.jpg
 comments: true
 ---
 
-## 目录
-
-[48. Rotate Image](#jump48)
-
-[218. The Skyline Problem](#jump218)
-
-[56. Merge Intervals](#jump56)
-
-[73. Set Matrix Zeroes](#jump73)
-
-<span id="jump48"></span>
+* toc
+{:toc}
 
 ## 48. Rotate Image
 

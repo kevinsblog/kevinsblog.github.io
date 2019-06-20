@@ -6,7 +6,10 @@ bigimg: /img/path.jpg
 comments: true
 ---
 
-## Fenwick Tree
+* toc
+{:toc}
+
+# Fenwick Tree
 
 > A Fenwick tree or binary indexed tree is a data structure that can efficiently update elements and calculate prefix sums in a table of numbers. This structure was proposed by Peter Fenwick in 1994 to improve the efficiency of arithmetic coding compression algorithms.
 

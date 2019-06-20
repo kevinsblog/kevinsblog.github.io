@@ -6,16 +6,8 @@ bigimg: /img/path.jpg
 comments: true
 ---
 
-## 目录
-
-1041. Robot Bounded In Circle
-989. Add to Array-Form of Integer
-838. Push Dominoes
-390. Elimination Game
-419. Battleships in a Board
-43. Multiply Strings
-54. Spiral Matrix
-59. Spiral Matrix II
+* toc
+{:toc}
 
 ## 1041. Robot Bounded In Circle
 

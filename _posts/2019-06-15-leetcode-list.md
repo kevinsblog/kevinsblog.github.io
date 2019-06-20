@@ -6,11 +6,8 @@ bigimg: /img/path.jpg
 comments: true
 ---
 
-# 目录 
-
-[82. Remove Duplicates from Sorted List II](#jump82)
-
-[143. Reorder List](#jump143)
+* toc
+{:toc}
 
 <span id="jump82"></span>
 

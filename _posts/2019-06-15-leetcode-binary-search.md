@@ -6,9 +6,8 @@ bigimg: /img/path.jpg
 comments: true
 ---
 
-# 目录
-
-[81. Search in Rotated Sorted Array II](#jump81)
+* toc
+{:toc}
 
 <span id="jump81">Medium</span>
 

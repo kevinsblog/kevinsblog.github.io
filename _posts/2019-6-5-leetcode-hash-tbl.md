@@ -6,6 +6,9 @@ bigimg: /img/path.jpg
 comments: true
 ---
 
+* toc
+{:toc}
+
 ## 423. Reconstruct Original Digits from English
 
 Medium

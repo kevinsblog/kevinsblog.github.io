@@ -6,19 +6,8 @@ bigimg: /img/path.jpg
 comments: true
 ---
 
-## 目录
-
-[55. Jump Game](#jump55)
-
-[45. Jump Game II](#jump45)
-
-[62. Unique Paths](#jump62)
-
-[63. Unique Paths II](#jump63)
-
-[64. Minimum Path Sum](#jump64)
-
-<span id="jump55">Medium</span>
+* toc
+{:toc}
 
 ## 55. Jump Game
 

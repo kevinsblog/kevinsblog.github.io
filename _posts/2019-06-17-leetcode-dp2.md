@@ -8,7 +8,8 @@ comments: true
 
 # 目录
 
-[120. Triangle](#jump120)
+* toc
+{:toc}
 
 <span id="jump120">Medium</span>
 

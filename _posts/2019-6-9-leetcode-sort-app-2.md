@@ -6,7 +6,10 @@ bigimg: /img/path.jpg
 comments: true
 ---
 
-## 34. Find First and Last Position of Element in Sorted Array
+* toc
+{:toc}
+
+# 34. Find First and Last Position of Element in Sorted Array
 
 Medium
 

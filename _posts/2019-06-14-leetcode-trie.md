@@ -6,9 +6,8 @@ bigimg: /img/path.jpg
 comments: true
 ---
 
-# 目录
-
-[212. Word Search II](#jump212-2)
+* toc
+{:toc}
 
 # 212. Word Search II
 
