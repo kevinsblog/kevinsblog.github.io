@@ -9,7 +9,7 @@ comments: true
 * toc
 {:toc}
 
-## 421. Maximum XOR of Two Numbers in an Array
+# 421. Maximum XOR of Two Numbers in an Array
 
 Medium
 
@@ -80,9 +80,8 @@ Runtime: 108 ms, faster than 50.91% of C++ online submissions for Maximum XOR of
 Memory Usage: 36.7 MB, less than 31.07% of C++ online submissions for Maximum XOR of Two Numbers in an Array.
 ```
 
-<span id="jump401"></span>
+# 401. Binary Watch
 
-401. Binary Watch
 Easy
 
 A binary watch has 4 LEDs on the top which represent the hours (0-11), and the 6 LEDs on the bottom represent the minutes (0-59).
@@ -176,7 +175,6 @@ Details
 Runtime: 4 ms, faster than 86.95% of C++ online submissions for Binary Watch.
 Memory Usage: 8.6 MB, less than 68.73% of C++ online submissions for Binary Watch.
 ```
-<span id="jump89"></span>
 
 # 89. Gray Code
 

@@ -6,8 +6,6 @@ bigimg: /img/path.jpg
 comments: true
 ---
 
-# 目录
-
 * toc
 {:toc}
 
