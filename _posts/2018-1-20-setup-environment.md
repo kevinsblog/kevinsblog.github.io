@@ -23,7 +23,6 @@ Git是分布式版本控制系统，集中式的控制系统将版本库放在�
 
 分布式版本控制系统根本没有“中央服务器”，每个人的电脑上都是一个完整的版本库，不需要联网工作。两个人同时修改后，只需要将自己的修改推送给对方。分布式控制的安全性更高，不会因为中心服务器崩坏导致代码丢失。分布式控制的服务器只是充当便利“交换”修改的工具。
 
-
 ![分布式控制](https://static.liaoxuefeng.com/files/attachments/918921562236160/0)
 
 ## 安装Git
@@ -184,6 +183,7 @@ d0229102b75ff92e8d82a93e02d3b20638178599 add distributed
 7462e5ee2be25c8ecbaf9ee4dffc81b7e98dd015 wrote a readme file
 ```
 查询当前版本
+```
 ┌────┐
 │HEAD│
 └────┘
@@ -193,10 +193,8 @@ d0229102b75ff92e8d82a93e02d3b20638178599 add distributed
         ○ add distributed
         │
         ○ wrote a readme file
-
 ```
 
-```
 回退到上一个版本(HEAD^)，上上一个版本(HEAD^^)
 ```
 git reset --hard HEAD^
