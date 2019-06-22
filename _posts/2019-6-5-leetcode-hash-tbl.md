@@ -1,7 +1,7 @@
 ---
 layout: post
 title: LeetCode专题-哈希表
-tags: [Leetcode]
+tags: [Leetcode, C/C++]
 bigimg: /img/path.jpg
 comments: true
 ---

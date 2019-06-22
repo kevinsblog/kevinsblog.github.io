@@ -2,7 +2,7 @@
 layout: post
 title: Jekyll博客配置笔记
 subtitle: Beautiful Jekyll
-tags: [css]
+tags: [CSS, Markdown]
 comments: true
 ---
 

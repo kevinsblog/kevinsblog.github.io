@@ -1,7 +1,7 @@
 ---
 layout: post
 title: LeetCode专题-模拟计算
-tags: [Leetcode]
+tags: [Leetcode, Python]
 bigimg: /img/path.jpg
 comments: true
 ---

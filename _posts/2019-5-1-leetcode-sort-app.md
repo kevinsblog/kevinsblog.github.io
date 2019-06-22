@@ -1,7 +1,7 @@
 ---
 layout: post
 title: LeetCode专题-排序应用
-tags: [Leetcode]
+tags: [Leetcode, Python]
 bigimg: /img/path.jpg
 comments: true
 ---

@@ -1,15 +1,13 @@
 ---
 layout: post
 title: LeetCode专题-二分搜索应用
-tags: [Leetcode]
+tags: [Leetcode, C/C++]
 bigimg: /img/path.jpg
 comments: true
 ---
 
 * toc
 {:toc}
-
-<span id="jump81">Medium</span>
 
 # 81. Search in Rotated Sorted Array II
 

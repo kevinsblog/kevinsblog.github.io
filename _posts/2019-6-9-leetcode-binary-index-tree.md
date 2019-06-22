@@ -1,7 +1,7 @@
 ---
 layout: post
 title: LeetCode专题-二叉索引树(Binary Index Tree/Fenwick Tree)
-tags: [Leetcode]
+tags: [Leetcode, C/C++]
 bigimg: /img/path.jpg
 comments: true
 ---

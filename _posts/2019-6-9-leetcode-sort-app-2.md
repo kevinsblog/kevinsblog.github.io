@@ -1,7 +1,7 @@
 ---
 layout: post
 title: LeetCode专题-排序应用(二)
-tags: [Leetcode]
+tags: [Leetcode, C/C++]
 bigimg: /img/path.jpg
 comments: true
 ---

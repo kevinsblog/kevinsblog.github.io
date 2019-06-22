@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Farewell Template
+tags: [Doc]
 ---
 
 Here is my farewell email ,
