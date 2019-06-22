@@ -1,12 +1,10 @@
 ---
 layout: post
-title: Mac/Linux 配置开发环境
-subtitle: Git
+title: Git使用
 tags: [Linux, Shell, Git]
 bigimg: /img/path.jpg
 comments: true
 ---
-**配置开发环境的过程繁琐而易错，每次安装新环境都要花费相当的时间，因此在本文中稍作总结**
 
 * toc
 {:toc}
@@ -497,4 +495,81 @@ git log --graph --pretty=oneline --abbrev-commit
 git branch -d feature1
 
 >Deleted branch feature1 (was 0afe918).
+```
+
+## No Fast Forward分支管理
+
+在合并时，默认会用Fast forward模式，在这种模式下，删除分支后，分支信息就丢失了。
+
+不用Fast forward模式，在合并时会生成一个新的commit，在分支历史可以看出分支信息。
+```
+$ git checkout -b dev
+$ git add readme.txt
+$ git commit -m "add merge"
+
+[dev 97f684d] add merge
+ 1 file changed, 1 insertion(+)
+```
+完成后切换分支，准备合并，禁用Fast forward，最后查看分支历史。
+```
+$ git checkout master
+$ git merge --no-ff -m "merge with no-ff" dev
+
+Merge made by the 'recursive' strategy.
+ readme.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+$ git log --graph --pretty=oneline --abbrev-commit
+
+*   55af3bb merge with no-ff
+|\  
+| * 97f684d add merge
+|/  
+*   36f9e7b merge
+```
+在禁用Fast forward后，分支合并就像，
+```
+                  master - HEAD
+                 /
+O - O - O - O - O
+          \   /
+            O (dev)
+```
+
+## 分支策略
+
+分支管理的几个基本原则是，
+
+* master分支是稳定的，仅用来发布新颁布，平常不用了提交
+* dev分支是不稳定的，用于日常工作
+* 每个人都在dev分支上工作，拥有自己的分支，提交合并到dev分支上
+
+![团队分支](https://static.liaoxuefeng.com/files/attachments/919023260793600/0)
+
+## Bug分支
+
+bug可以通过一个临时的分支来管理修复，修复后合并分支，删除临时分支。
+
+比如，临时接到修复bug101的任务，但是dev分支还没有完成提交，可以用git stash将工作现场储藏起来，后续恢复现场
+```
+$ git status
+$ git stash
+```
+在master分支上修复bug101
+```
+$ git checkout master
+$ git checkout -b issue-101
+```
+修复完成后，切换回master分支，进行合并
+```
+$ git checkout master
+$ git merge --no-ff -m "merged bug fix 101" issue-101
+```
+回到dev分支工作
+```
+$ git checkout dev
+$ git status
+$ git stash list
+$ git stash pop
+$ git stash apply stash@{0} //恢复到特定的现场
 ```
