@@ -18,11 +18,9 @@ comments: true
 ## 关于Git
 
 Git是分布式版本控制系统，集中式的控制系统将版本库放在中心服务器上，每次更改要从服务器上取得代码，更改后推送回服务器，好比一个图书馆，修改一本书需要先借出来，修改后还回去。集中式代码控制必须联网才能工作。
-
 ![中心化控制](https://static.liaoxuefeng.com/files/attachments/918921540355872/0)
 
 分布式版本控制系统根本没有“中央服务器”，每个人的电脑上都是一个完整的版本库，不需要联网工作。两个人同时修改后，只需要将自己的修改推送给对方。分布式控制的安全性更高，不会因为中心服务器崩坏导致代码丢失。分布式控制的服务器只是充当便利“交换”修改的工具。
-
 ![分布式控制](https://static.liaoxuefeng.com/files/attachments/918921562236160/0)
 
 ## 安装Git
@@ -44,7 +42,7 @@ git config --global user.email <email>
 ```
 ssh -T git@github.com
 ```
-创建本地SSH密钥，
+创建本地SSH密钥，GitHub需要用它来识别推送的提交时由授权用户发出的，
 ```
 ssh-keygen -t rsa -C "<email>"
 ```
@@ -221,4 +219,282 @@ d022910 HEAD@{1}: reset: moving to HEAD^
 c049e8c HEAD@{2}: commit: add GPL
 d022910 HEAD@{3}: commit: add distributed
 7462e5e HEAD@{4}: commit (initial): wrote a readme file
+```
+
+## 工作区与暂存区
+
+隐藏目录.git是Git的版本库，版本库中最重要的是暂存区(stage, index)，还有Git创建的分支，master，以及指向master的指针HEAD。
+![工作区和暂存区](https://static.liaoxuefeng.com/files/attachments/919020037470528/0)
+
+git add 将将文件修改添加到暂存区，git commit将暂存区的所有内容提交到当前分支。
+
+Git跟踪并管理的是修改(增加删除字符，增加删除文件)，而不是文件，git add命令中，工作区修改被存入暂存区。
+
+修改和提交的一般流程是，
+第一次修改 -> git add -> 第二次修改 -> git add -> git commit
+如果修改不加入暂存区，是不会跟着git commit提交上去的。
+
+```
+git diff HEAD -- readme.txt
+
+>diff --git a/readme.txt b/readme.txt
+index 22c0582..7dca198 100644
+--- a/readme.txt
++++ b/readme.txt
+@@ -1,3 +1,4 @@
+ Git is a distributed version control system.
+ Git is free software under the GPL.
+ Git has a mutable index called stage.
++Git tracks changes
+```
+
+撤销修改，若修改还没有被放到暂存区，文件回到和版本库一模一样，已经添加到暂存区的修改，撤回添加暂存区前的状态。
+```
+git checkout -- readme.txt   //丢弃工作区未提交的修改
+git status
+
+>On branch master
+nothing to commit, working tree clean
+```
+若要丢弃添加到暂存区的修改。
+```
+git status
+
+>On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	modified:   readme.txt
+
+git reset HEAD readme.txt
+git checkout -- readme.txt
+git status
+
+>On branch master
+nothing to commit, working tree clean
+```
+已经提交的修改，要撤销需要版本回退。
+
+## 删除文件
+
+添加一个文件
+```
+touch test.txt
+git add .
+git commit -m 'add new text test'
+```
+
+从本地及库上删除文件
+```
+rm test.txt
+git status
+
+>On branch master
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	deleted:    test.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+git rm test.txt
+> On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	deleted:    test.txt
+
+git commit -m "remove text test"
+```
+还原误删的文件
+```
+git checkout -- test.txt
+```
+
+# Git远程仓库和GitHub
+
+Git是分布式版本控制系统，同一个Git仓库可以分布到不同的机器上，一台机器上有一个原始版本库，别的机器可以克隆这个版本库，每台机器的版本库都一样，没有主次之分。
+
+实际情况下，一般是找一台电脑充当服务器，每个人都从服务器仓库克隆一份到本地，再各自把提交推送到服务器仓库，也可以从服务器拉去别人的提交。
+
+GitHub提供了Git仓库的托管服务
+
+## 添加远程仓库
+
+登录GitHub，创建名为learngit的仓库，关联本地仓库和远程仓库，origin是默认的远程库名，
+```
+git remote add origin git@github.com:kevinsblog/learngit.git
+```
+把本地库的内容推送到远程库，把当前分支master推送到远端。第一次推送时，加上-u参数，Git把本地master分支和远程master分支关联起来
+```
+git push -u origin master  //第一次推送
+git push origin master  //后续推送
+```
+
+# Git分支管理
+
+分支是两个平行宇宙。假设在开发一个新功能，需要一段时间，在功能未完成前，若提交代码会造成代码库不完整，其它人无法干活，但是如果代码留到完成后才一次提交，又存在丢失进度的巨大风险。
+
+因此可以创建一个属于自己的分支，别人看不到，继续在原来的分支上工作，而自己在自己的分支上工作，该提交就提交，直到开发完毕，最后一次性合并到原来的分支上。
+
+## 创建和合并分支
+
+每次提交，Git会把它们串成一条时间线，时间线是一条分支，如master分支。HEAD指向当前分支。
+```
+    HEAD
+        \
+        master
+          |
+O -> O -> O
+```
+
+创建新分支dev，再把HEAD指向dev，将当前分支改为dev，再向dev分支提交。dev指针往前移动一步，master指针则不变。合并分支时，将master指向dev的当前提交，就完成了合并。
+```
+git checkout -b dev //创建并切换
+git branch  //查看当前分支
+
+>* dev
+  master
+
+cat readme.txt
+>Git is for version ctrl
+Add branch Dev
+```
+或者
+```
+git branch dev
+git checkout dev
+```
+切换分支后，利用git add和git commit提交代码
+切换回master分支
+```
+cat readme.txt 
+
+>Git is for version ctrl
+Add branch Dev
+
+git checkout master
+
+>M	readme.txt
+Switched to branch 'master'
+Your branch is up-to-date with 'origin/master'.
+
+cat readme.txt 
+>Git is for version ctrl
+```
+切换回master分支后，只在dev分支上提交的代码就看不到了。
+```
+        master
+          |
+O -> O -> O -> O
+               |
+              dev
+                \
+                 HEAD
+```
+合并分支时，将master指向dev的当前提交，就完成了合并。合并后删除dev分支，就是把dev的指针删掉。
+```
+git merge dev //将dev分支的工作合并到master分支
+
+>Updating aeb092e..d0451db
+Fast-forward
+ readme.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+git branch -d dev //合并dev分支后删除dev分支
+
+>Deleted branch dev (was d0451db).
+
+git branch
+
+>* master
+```
+git merge合并指定分支(dev)到当前分支(master)
+```
+          HEAD
+             \       
+            master
+               |
+O -> O -> O -> O
+```
+
+## 解决分支冲突
+
+分支合并之前可能要先解决冲突，
+```
+git checkout -b feature1
+
+//添加新行 “feature1 branch work”
+```
+切换到master分支
+```
+git checkout master
+
+>Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+//添加新行 “master branch work"
+```
+两个分支各有新的提交，快速合并是无法执行的，会检测到冲突
+```
+O - O - O - O (master)
+         \_ O (feature1)
+```
+```
+git merge feature1
+
+>Auto-merging readme.txt
+CONFLICT (content): Merge conflict in readme.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+git status
+
+>On branch master
+Your branch is ahead of 'origin/master' by 2 commits.
+  (use "git push" to publish your local commits)
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+
+	both modified:   readme.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+查看冲突，++<<<<<<<和++>>>>>>>标注了不同分支的内容。
+```
+git diff readme.txt 
+
+>--- a/readme.txt
++++ b/readme.txt
+@@@ -1,3 -1,3 +1,7 @@@
+  Git is for version ctrl
+  Add branch Dev
+++<<<<<<< HEAD
+ +master branch work
+++=======
++ feature1 branch work
+++>>>>>>> feature1
+```
+编辑文件后再提交，查看分支合并过程。
+```
+git log --graph --pretty=oneline --abbrev-commit
+
+>*   36f9e7b merge
+|\  
+| * 0afe918 feature1
+* | a294971 master
+|/  
+* d0451db add one line in dev
+* aeb092e readme
+* 513a369 Initial commit
+```
+删除feature1分支
+```
+git branch -d feature1
+
+>Deleted branch feature1 (was 0afe918).
 ```
