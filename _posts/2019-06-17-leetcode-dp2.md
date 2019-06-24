@@ -9,8 +9,6 @@ comments: true
 * toc
 {:toc}
 
-<span id="jump120">Medium</span>
-
 # 120. Triangle
 
 Medium

@@ -60,3 +60,64 @@ Details
 Runtime: 8 ms, faster than 95.21% of C++ online submissions for Find First and Last Position of Element in Sorted Array.
 Memory Usage: 10.4 MB, less than 53.82% of C++ online submissions for Find First and Last Position of Element in Sorted Array.
 ```
+
+# 1. Two Sum
+
+Easy
+
+Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+```
+Example:
+
+Given nums = [2, 7, 11, 15], target = 9,
+
+Because nums[0] + nums[1] = 2 + 7 = 9,
+return [0, 1].
+```
+
+题目大意：在一个数组中，找到两个数，两数之和等于目标值。
+
+解题思路：将数组进行排序，从两头找起，逐步缩小两数和和目标值的差距。稍微麻烦的是，题目要求返回数在数组中的索引，特别是找到两个相等的目标数后，求索引要留意。
+
+{% highlight c++ linenos %}
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        auto nums_cp = nums;;
+        sort(nums.begin(), nums.end());
+        auto beg = nums.begin(), end = nums.end()-1;
+        while(beg < end){
+            int sum = *beg + *end;
+            if(sum == target){
+                vector<int>::iterator first, second;
+                if(*beg == *end){
+                    //second num must comes after first if their value is equal
+                    first = find(nums_cp.begin(), nums_cp.end(), *beg);
+                    second = find(first + 1, nums_cp.end(), *end);           
+                }else{
+                    first = find(nums_cp.begin(), nums_cp.end(), *beg);
+                    second = find(nums_cp.begin(), nums_cp.end(), *end);           
+                }
+
+                return vector<int>{first - nums_cp.begin(), second - nums_cp.begin()};
+            }else if (sum < target) {
+                beg++;
+            }else{
+                end--;
+            }
+        }
+
+        return vector<int>{-1, -1};        
+    }
+};
+{% endhighlight %}
+测试一下，
+```
+Success
+Details
+Runtime: 8 ms, faster than 96.73% of C++ online submissions for Two Sum.
+Memory Usage: 9.4 MB, less than 62.78% of C++ online submissions for Two Sum.
+```

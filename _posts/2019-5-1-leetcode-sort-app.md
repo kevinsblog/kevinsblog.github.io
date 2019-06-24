@@ -6,9 +6,8 @@ bigimg: /img/path.jpg
 comments: true
 ---
 
-**853. Car Fleet**
-**945. Minimum Increment to Make Array Unique**
-**899. Orderly Queue**
+* toc
+{:toc}
 
 # 853. Car Fleet
 
@@ -68,14 +67,14 @@ Runtime: 76 ms, faster than 93.20% of Python3 online submissions for Car Fleet.
 Memory Usage: 15.3 MB, less than 59.78% of Python3 online submissions for Car Fleet.
 ```
 
-#976. Largest Perimeter Triangle
+# 976. Largest Perimeter Triangle
+
 Easy
 
 Given an array A of positive lengths, return the largest perimeter of a triangle with non-zero area, formed from 3 of these lengths.
 
 If it is impossible to form any triangle of non-zero area, return 0.
 
- 
 
 Example 1:
 
@@ -182,7 +181,8 @@ Runtime: 168 ms, faster than 42.89% of Python3 online submissions for Minimum In
 Memory Usage: 19 MB, less than 7.08% of Python3 online submissions for Minimum Increment to Make Array Unique.
 ```
 
-#922. Sort Array By Parity II
+# 922. Sort Array By Parity II
+
 Easy
 
 Given an array A of non-negative integers, half of the integers in A are odd, and half of the integers are even.
@@ -246,7 +246,7 @@ Runtime: 352 ms, faster than 5.21% of Python3 online submissions for Sort Array 
 Memory Usage: 15.9 MB, less than 5.25% of Python3 online submissions for Sort Array By Parity II.
 ```
 
-#26\. Remove Duplicates from Sorted Array
+# 26. Remove Duplicates from Sorted Array
 
 Easy
 
@@ -295,7 +295,8 @@ Runtime: 56 ms, faster than 95.70% of Python3 online submissions for Remove Dupl
 Memory Usage: 15 MB, less than 11.86% of Python3 online submissions for Remove Duplicates from Sorted Array.
 ```
 
-#905. Sort Array By Parity
+# 905. Sort Array By Parity
+
 Easy
 
 Given an array A of non-negative integers, return an array consisting of all the even elements of A, followed by all the odd elements of A.
