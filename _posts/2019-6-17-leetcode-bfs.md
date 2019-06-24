@@ -9,8 +9,6 @@ comments: true
 * toc
 {:toc}
 
-<span id="jump429">Medium</span>
-
 # 429. N-ary Tree Level Order Traversal
 
 Easy
@@ -97,7 +95,6 @@ Details
 Runtime: 156 ms, faster than 83.54% of C++ online submissions for N-ary Tree Level Order Traversal.
 Memory Usage: 33.8 MB, less than 62.80% of C++ online submissions for N-ary Tree Level Order Traversal.
 ```
-<span id="jump127">Medium</span>
 
 # 127. Word Ladder
 
@@ -199,7 +196,6 @@ Details
 Runtime: 464 ms, faster than 39.00% of C++ online submissions for Word Ladder.
 Memory Usage: 13.2 MB, less than 66.67% of C++ online submissions for Word Ladder.
 ```
-<span id="jump130">Medium</span>
 
 # 130. Surrounded Regions
 
@@ -311,7 +307,6 @@ Details
 Runtime: 32 ms, faster than 80.98% of C++ online submissions for Surrounded Regions.
 Memory Usage: 14.2 MB, less than 67.53% of C++ online submissions for Surrounded Regions.
 ```
-<span id="jump200">Medium</span>
 
 # 200. Number of Islands
 
