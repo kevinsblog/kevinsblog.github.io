@@ -38,7 +38,7 @@ Bonus point if you are able to do this using only O(n) extra space, where n is t
 
 解题思路：用dp来做，但是题目要求只能用O(n)的空间复杂度，因此记录路径和的dp是一个长度为n的数组，而不能是mxn的二维数组。
 
-```c++
+{% highlight c++ linenos %}
 class Solution {
 public:
     int minimumTotal(vector<vector<int>>& triangle) {
@@ -55,7 +55,7 @@ public:
         return dp[0];        
     }
 };
-```
+{% endhighlight %}
 测试一下，
 ```
 Success
@@ -99,7 +99,7 @@ Output: false
 
 解题思路：用动态规划，递推公式是，有字符串位置j和i，若s\[0:j\]已经确定可以分割，s\[j:i\]也存在在字典中，则s\[0:i\]也可以分割。
 
-```c++
+{% highlight c++ linenos %}
 class Solution {
 public:
     bool wordBreak(string s, vector<string>& dict) {
@@ -121,11 +121,62 @@ public:
         return dp[s.length()];        
     }
 };
-```
+{% endhighlight %}
 测试一下，
 ```
 Success
 Details
 Runtime: 4 ms, faster than 97.49% of C++ online submissions for Word Break.
 Memory Usage: 10.6 MB, less than 74.84% of C++ online submissions for Word Break.
+```
+
+# 152. Maximum Product Subarray
+
+Medium
+
+Given an integer array nums, find the contiguous subarray within an array (containing at least one number) which has the largest product.
+
+```
+Example 1:
+
+Input: [2,3,-2,4]
+Output: 6
+Explanation: [2,3] has the largest product 6.
+
+Example 2:
+
+Input: [-2,0,-1]
+Output: 0
+Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
+```
+
+题目大意：在一个数组中，找到一个子数组，使得子数组元素的乘积最大。
+
+解题思路：用动态规划，考虑到负数x负数为正，最小的负乘积在乘以一个负数后可以变为最大，因此也要追踪最小值。
+
+{% highlight c++ linenos %}
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        vector<int> dp_max(nums.size(), 0), dp_min(nums.size(), 0);
+        dp_max[0] = dp_min[0] = nums[0];
+        int max_val = nums[0];
+
+        //the min val could flip to max val
+        for(int i = 1; i < nums.size(); i++){
+            dp_max[i] = max(max(dp_max[i-1]*nums[i], dp_min[i-1]*nums[i]),nums[i]);
+            dp_min[i] = min(min(dp_max[i-1]*nums[i], dp_min[i-1]*nums[i]), nums[i]);
+            max_val = max(max_val, dp_max[i]);
+        }
+
+        return max_val;      
+    }
+};
+{% endhighlight %}
+测试一下，
+```
+Success
+Details
+Runtime: 4 ms, faster than 95.29% of C++ online submissions for Maximum Product Subarray.
+Memory Usage: 9.3 MB, less than 7.36% of C++ online submissions for Maximum Product Subarray.
 ```

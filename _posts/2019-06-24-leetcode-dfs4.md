@@ -20,6 +20,7 @@ Note:
     The same word in the dictionary may be reused multiple times in the segmentation.
     You may assume the dictionary does not contain duplicate words.
 
+```
 Example 1:
 
 Input:
@@ -51,12 +52,13 @@ s = "catsandog"
 wordDict = ["cats", "dog", "sand", "and", "cat"]
 Output:
 []
+```
 
 题目大意：上接139题，给一个字符串和一个字符串字典，要求利用字典中的元素分割字符串，找到所有的分割方法。
 
 解题思路：看起来用DFS就可以解决，但是单纯的DFS不能通过一些测试用例。
 
-```c++
+{% highlight c++ linenos %}
 class Solution {
 public:
     void WordBreakDFS(const string &s, const set<string> &dict, int start, vector<string> &path, vector<string> &ans){
@@ -91,7 +93,7 @@ public:
         return move(ans);
     }
 };
-```
+{% endhighlight %}
 重复搜索太多，导致测试用例超时
 ```
 Time Limit Exceeded
@@ -104,7 +106,7 @@ Last executed input
 
 解题思路：利用记忆递归，记忆字符串s的分割集合subset。在字符串s中寻找分割点，分为左右两个部分，左半字符串在字典中，递归分割右半字符串。
 
-```c++
+{% highlight c++ linenos %}
 class Solution {
 public:
     vector<string> wordBreak(string s, vector<string>& wordDict) {
@@ -154,7 +156,7 @@ private:
 private:
     unordered_map<string, vector<string>> mem_;
 };
-```
+{% endhighlight %}
 测试一下，
 ```
 Success
