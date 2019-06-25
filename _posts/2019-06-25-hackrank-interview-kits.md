@@ -11,7 +11,7 @@ comments: true
 
 # Sock Merchant (Scores 15)
 
-![原题](https://www.hackerrank.com/challenges/sock-merchant/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=warmup)
+[原题](https://www.hackerrank.com/challenges/sock-merchant/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=warmup)
 
 题目大意：一个长为N的数组，表示N条颜色不同的袜子，要求这一堆袜子可以找出几双。
 
