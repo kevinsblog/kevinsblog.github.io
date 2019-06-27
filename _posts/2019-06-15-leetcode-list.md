@@ -1,15 +1,13 @@
 ---
 layout: post
 title: LeetCode专题-链表
-tags: [Leetcode, C/C++]
+tags: [Leetcode, C/C++, Golang]
 bigimg: /img/path.jpg
 comments: true
 ---
 
 * toc
 {:toc}
-
-<span id="jump82"></span>
 
 # 82. Remove Duplicates from Sorted List II
 
@@ -81,7 +79,6 @@ Details
 Runtime: 8 ms, faster than 93.29% of C++ online submissions for Remove Duplicates from Sorted List II.
 Memory Usage: 10.1 MB, less than 5.03% of C++ online submissions for Remove Duplicates from Sorted List II.
 ```
-<span id="jump143"></span>
 
 # 143. Reorder List
 
@@ -158,3 +155,56 @@ Runtime: 44 ms, faster than 98.09% of C++ online submissions for Reorder List.
 Memory Usage: 12.2 MB, less than 54.52% of C++ online submissions for Reorder List.
 ```
 
+# 2. Add Two Numbers
+
+Medium
+
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+```
+Example:
+
+Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+Output: 7 -> 0 -> 8
+Explanation: 342 + 465 = 807.
+```
+
+题目大意：两个数字一位一位地存在链表中，要求两数之和。
+
+解题思路：链表操作。
+
+{% highlight c++ linenos %}
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func addTwoNumbers(l1, l2 *ListNode)  *ListNode {
+	var carry, num int
+	dummy := &ListNode{}
+	pre := dummy
+	for l1 != nil || l2 != nil || carry != 0 {
+		var n1, n2 int
+		if l1 != nil {n1 = l1.Val}
+		if l2 != nil {n2 = l2.Val}
+		num = (n1 + n2 + carry)%10
+		carry = (n1 + n2 + carry)/10
+		pre.Next = &ListNode{Val:num}
+		if l1 != nil {l1 = l1.Next}
+		if l2 != nil {l2 = l2.Next}
+		pre = pre.Next
+	}
+
+	return dummy.Next
+}
+{% endhighlight %}
+测试一下
+```
+1563 / 1563 test cases passed.
+Status: Accepted
+Runtime: 16 ms
+Memory Usage: 4.9 MB
+```
