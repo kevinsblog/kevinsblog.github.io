@@ -70,6 +70,76 @@ void tokenizeDemo(){
 |bye|
 ```
 
+# Memcpy的实现
+
+不调用C/C++库函数，实现memcpy。
+
+{% highlight c++ linenos %}
+void * memcpy(void *dst, void *src, size_t cnt){
+    assert(dst != nullptr && src != nullptr);
+    unsigned char *pdst = (unsigned char *)dst;
+    const unsigned char *psrc = (const unsigned char *)src;
+
+    //make sure no overlap between two memory region
+    assert(!(psrc <= pdst && pdst < psrc + cnt) && 
+            !(pdst <= psrc && psrc < pdst + cnt));
+
+    while(cnt--){
+        *pdst++ = *psrc++;
+    }
+
+    return dst;
+}
+
+void memcpyTest(){
+    //copy str from src to dst and print out
+    char src[256] = "hello my friend", dst[256];
+    cout << (char *)memcpy(dst, src, strlen(src)+1)<<endl;
+}
+{% endhighlight %}
+测试一下
+```
+hello my friend
+```
+
+# Memove的实现
+
+memove实现的是剪切粘贴的功能，允许内存存在重叠区，可能覆盖原数据。
+
+{% highlight c++ linenos %}
+void *memmove(void *dst, void *src, size_t cnt){
+    void *ret = dst;
+    unsigned char *pdst = (unsigned char *)dst;
+    const unsigned char *psrc = (const unsigned char *)src;
+
+    if(pdst < psrc || pdst >= (psrc + cnt)){ //if overlap not exists
+        //copy from start to end
+        while(cnt--){
+            *pdst++ = *psrc++;
+        }
+    }else{ //if overlap exists
+        pdst += cnt - 1;
+        psrc += cnt - 1;
+        //copy from end to start
+        while(cnt--){
+            *pdst-- = *psrc--;
+        }
+    }
+
+    return ret;
+}
+
+void memmoveTest(){
+    char buf[256] = "hello my friend";
+    char *dst = (char *)memmove(buf + 10, buf, strlen(buf)+1);
+    printf("%p->%p: %s\n", buf, dst, dst);
+}
+{% endhighlight %}
+测试一下
+```
+0x7ffee7e1e6a0->0x7ffee7e1e6aa: hello my friend
+```
+
 {% highlight c++ linenos %}
 
 {% endhighlight %}
