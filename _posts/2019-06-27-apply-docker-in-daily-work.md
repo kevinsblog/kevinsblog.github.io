@@ -11,6 +11,7 @@ comments: true
 
 # Resume
 
+用Markdown写简历，再将markdown简历转成pdf或者html文档。
 ```
 docker run -v ${PWD}:/resume there4/markdown-resume md2resume html examples/source/myresume.md examples/output/
 ```
