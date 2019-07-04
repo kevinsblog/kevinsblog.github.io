@@ -24,6 +24,7 @@ description: 本是山中闲散人，只因美酒留此间
 # List of links in the navigation bar
 navbar-links:
   分类索引: "tags"
+  我的简历: "myresume"
   简书: "https://www.jianshu.com/u/a0839bc8e7b4"
   学术成果: "mypaper"
   个人介绍: "aboutme"

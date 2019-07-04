@@ -8,3 +8,9 @@ comments: true
 
 * toc
 {:toc}
+
+# Resume
+
+```
+docker run -v ${PWD}:/resume there4/markdown-resume md2resume html examples/source/myresume.md examples/output/
+```
