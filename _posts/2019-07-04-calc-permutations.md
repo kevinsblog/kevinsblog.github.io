@@ -69,7 +69,7 @@ abc acb bac bca cba cab
     * y尽可能小
     * B中的字符由大到小排列
 
-
+找下一个排列可以用std::next_permutation()
 {% highlight c++ linenos %}
 void calcAllPermutation2(string &s, vector<string> &ans){
     do{
@@ -83,6 +83,32 @@ void calcAllPermutation2(string &s, vector<string> &ans){
 abc acb bac bca cab cba 
 ```
 
+也可以自己写一个，
 {% highlight c++ linenos %}
+bool calcAllPermutation3Helper(string &s, int num){
+    int i = 0;
+    //find the pos i of last ascending element
+    for(i = num - 2; i >= 0 && s[i] >= s[i+1]; i--){}
+    if(i < 0){
+        return false;
+    }
 
+    int k = 0;
+    //find the last pos k greater than s[i]
+    for(k = num - 1; k > i && s[k] <= s[i]; k--){}
+    swap(s[i], s[k]);
+    reverse(s.begin() + i + 1, s.begin() + num); //revers the substr after i
+    return true;
+}
+
+void calcAllPermutation3(string &s, vector<string> &ans){
+    do{
+        ans.push_back(s);
+    }while(calcAllPermutation3Helper(s, s.size()));
+}
 {% endhighlight %}
+测试一下，
+```
+abc acb bac bca cab cba 
+```
+
