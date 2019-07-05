@@ -1,7 +1,7 @@
 ---
 layout: post
 title: LeetCode专题 - 排列
-tags: [Leetcode, C/C++, SQL]
+tags: [Leetcode, C/C++]
 bigimg: /img/path.jpg
 comments: true
 ---
