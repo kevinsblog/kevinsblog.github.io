@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 求字符串的所有全排列
+title: 求字符串的所有排列
 tags: [C/C++, Algorithm, Data Structures]
 bigimg: /img/path.jpg
 comments: true
