@@ -98,7 +98,6 @@ Details
 Runtime: 72 ms, faster than 51.46% of C++ online submissions for Word Search.
 Memory Usage: 14.5 MB, less than 57.58% of C++ online submissions for Word Search.
 ```
-<span id="jump212"></span>
 
 # 212. Word Search II
 
