@@ -552,6 +552,144 @@ public:
 内存消耗 :8.9 MB, 在所有 C++ 提交中击败了86.77%的用户
 ```
 
+# 23. 合并K个排序链表
+
+合并 k 个排序链表，返回合并后的排序链表。请分析和描述算法的复杂度。
+
+```
+示例:
+
+输入:
+[
+  1->4->5,
+  1->3->4,
+  2->6
+]
+输出: 1->1->2->3->4->4->5->6
+```
 
 {% highlight c++ linenos %}
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if(lists.size() == 0){
+            return nullptr;
+        }else if(lists.size() == 1){
+            return *lists.begin();
+        }
+        
+        ListNode *head = mergeTwoLists(lists[0], lists[1]);
+        for(int i = 2; i < lists.size(); i++){
+            head = mergeTwoLists(head, lists[i]);
+        }
+        return head;
+    }
+};
 {% endhighlight %}
+测试一下，
+```
+执行结果：
+通过
+显示详情
+执行用时 :356 ms, 在所有 C++ 提交中击败了16.49% 的用户
+内存消耗 :10.4 MB, 在所有 C++ 提交中击败了100.00%的用户
+```
+
+# 572. 另一个树的子树
+
+给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。s 的一个子树包括 s 的一个节点和这个节点的所有子孙。s 也可以看做它自身的一棵子树。
+
+```
+示例 1:
+给定的树 s:
+
+     3
+    / \
+   4   5
+  / \
+ 1   2
+
+给定的树 t：
+
+   4 
+  / \
+ 1   2
+
+返回 true，因为 t 与 s 的一个子树拥有相同的结构和节点值。
+
+示例 2:
+给定的树 s：
+
+     3
+    / \
+   4   5
+  / \
+ 1   2
+    /
+   0
+
+给定的树 t：
+
+   4
+  / \
+ 1   2
+
+返回 false。
+```
+
+{% highlight c++ linenos %}
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isSameTree(TreeNode *s, TreeNode *t){
+        if(!s && !t){
+            return true;
+        }else if(!s || !t){
+            return false;
+        }
+        
+        return s->val == t->val && isSameTree(s->left, t->left) &&
+            isSameTree(s->right, t->right);
+    }
+    
+    bool isSubtree(TreeNode* s, TreeNode* t) {
+        bool result = false;
+        if(!s || !t){
+            return result;
+        }
+        
+        if(s->val == t->val){
+            result = isSameTree(s, t);
+        }
+        if(!result){
+            result = isSubtree(s->left, t) || isSubtree(s->right, t);
+        }
+        
+        return result;
+    }
+};
+{% endhighlight %}
+测试一下，
+```
+执行结果：
+通过
+显示详情
+执行用时 :36 ms, 在所有 C++ 提交中击败了88.75% 的用户
+内存消耗 :20.8 MB, 在所有 C++ 提交中击败了93.36%的用户
+```
