@@ -1,7 +1,7 @@
 ---
 layout: post
-title: LeetCode专题 - Medium题集合(二)
-tags: [Leetcode, C/C++]
+title: LeetCode专题 - 复习题集合(二)
+tags: [Leetcode, C/C++， Golang]
 bigimg: /img/path.jpg
 comments: true
 ---
@@ -521,5 +521,148 @@ public:
 内存消耗 :13.5 MB, 在所有 C++ 提交中击败了98.66%的用户
 ```
 
+# 验证二叉搜索树的后序遍历序列
+
 {% highlight c++ linenos %}
+bool verifySequenceOfBST(vector<int> &seq, int beg, int end){
+    if(seq.size() == 0){
+        return false;
+    }else if(seq.size() == 1){
+        return true;
+    }
+
+    int root = *seq.rbegin();
+    int left = beg;
+    for(; left < end; left++){
+        if(seq.at(left) > root)
+            break;
+    }
+
+    int right = left;
+    for(; right < end; right++){
+        if(seq.at(right) < root)
+            return false;
+    }
+
+    if(left > 0 && !verifySequenceOfBST(seq, beg, left)){
+        return false;
+    }
+
+    if(right < end - 1 && !verifySequenceOfBST(seq, left + 1, right)){
+        return false;
+    }
+
+    return true;
+}
+
+bool verifySequenceOfBST(vector<int> &seq){
+    return verifySequenceOfBST(seq, 0, seq.size() - 1);
+}
 {% endhighlight %}
+
+# 106. 从中序与后序遍历序列构造二叉树
+
+根据一棵树的中序遍历与后序遍历构造二叉树。
+
+注意:
+你可以假设树中没有重复的元素。
+
+例如，给出
+
+```
+中序遍历 inorder = [9,3,15,20,7]
+后序遍历 postorder = [9,15,7,20,3]
+
+返回如下的二叉树：
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+```
+{% highlight c++ linenos %}
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:  
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+        if(inorder.size() != postorder.size() || inorder.size() == 0){
+            return nullptr;
+        }
+        
+        TreeNode *root = new TreeNode(*postorder.rbegin());
+        if(inorder.size() == 1){
+            return root;
+        }
+        
+        auto mid = find(inorder.begin(), inorder.end(), *postorder.rbegin());
+        vector<int> inleft(inorder.begin(), mid), //[first, last)
+                    inright(mid + 1, inorder.end()),
+                    postleft, postright;
+        //build left/right post order seq
+        for(auto it = postorder.begin(); it < postorder.end() - 1; it++){
+            if(find(inleft.begin(), inleft.end(), *it) != inleft.end()){
+                postleft.push_back(*it);
+            }else{
+                postright.push_back(*it);
+            }
+        }
+        root->left = buildTree(inleft, postleft);
+        root->right = buildTree(inright, postright);
+        return root;
+    }
+};
+{% endhighlight %}
+测试一下，由于每一颗子树都要复制序列数组，在测试大数据量用例时会超时。
+```
+执行结果：
+超出时间限制
+显示详情
+最后执行的输入：
+[-999,-998,-997,-996,-995,-994,-993,-992,-991,-990,-989,-988,-987,-986,-985,-984,-983,-982,-981,-980,-979,-978,-977,-976,-975,-974,-973,-972,-971,....
+查看全部
+```
+
+C++里没有数组的概念，用Go来写这道题，
+{% highlight golang linenos %}
+func buildTree(inorder []int, postorder []int) *TreeNode {
+    var root *TreeNode
+    if len(inorder) != len(postorder) || len(postorder) == 0 {
+        return root
+    }
+    
+    rootVal := postorder[len(postorder)-1]
+    root = &TreeNode{Val:rootVal}
+    if len(postorder) == 0 {
+        return root
+    }
+    
+    var idx int
+    for ; idx < len(postorder)-1; idx++ {
+        if inorder[idx] == rootVal {
+            break
+        }
+    }
+    
+    root.Left = buildTree(inorder[:idx], postorder[:idx])
+    root.Right = buildTree(inorder[idx+1:], postorder[idx:len(postorder)-1])
+    return root
+}
+{% endhighlight %}
+测试一下，这次我们没有做多余的序列复制，因此通过了测试。
+```
+执行结果：
+通过
+显示详情
+执行用时 :36 ms, 在所有 Go 提交中击败了81.93% 的用户
+内存消耗 :24.8 MB, 在所有 Go 提交中击败了18.18%的用户
+```
+
