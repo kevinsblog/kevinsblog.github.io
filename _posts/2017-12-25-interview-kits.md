@@ -9,9 +9,102 @@ comments: true
 * toc
 {:toc}
 
+# 判断CPU是大端还是小端
+
+```c
+//if CPU is of big endian, return 0, if little endian,
+//  return 1
+int checkCPU(){
+    union w{
+        int  a;
+        char b;
+    } c;
+    c.a = 1;
+    return c.b == 1;
+}
+```
+
+小端：低地址存低字节，大端反正
+对于16bit数，0x1234，小端存放为
+    0x4000: 0x34
+    0x4001: 0x12
+大端存放为，
+    0x4000: 0x12
+    0x4001: 0x34
+
+转换大小端，
+```c
+#define swap32Endian(x)    (((x)&(0x0000ffff)) << 32 | ((x)&(0xffff0000) >> 32)
+#define swap64Endian(x)    (((x)&(0x00000000ffffffff)) >> 64 | ((x)&(0xffffffff00000000) >>64)
+```
+
+# strcat()
+
+```c
+char *do_strcat(char *dst, const char *src){
+    if(!src || !*src){
+        return dst;
+    }
+    char *ret = dst;
+    while(*dst){dst++;}; //move to the end
+    while(*dst++ = *src++); //copy util reach '\0'
+    return ret;
+}
+```
+
+# 两个字符串表述的数相加
+
+```c
+void reverseString(char* s, int sSize){
+    if(!s || sSize <= 1){
+        return;
+    }
+    
+    char *pbeg = s, *pend = s + sSize - 1;
+    char tmp;
+    while(pbeg < pend){
+        tmp = *pbeg;
+        *pbeg = *pend;
+        *pend = tmp;
+        pbeg++;
+        pend--;
+    }
+    
+    return;
+}
+
+int max(int a, int b){
+    return a >= b ? a : b;
+}
+
+char * addStrings(char * num1, char * num2){
+    int res_len = max(strlen(num1), strlen(num2)) + 2;
+    char *res = (char *)calloc(sizeof(char), res_len);
+    char *cur = res;
+    int carry = 0, n1, n2, n3 = 0;
+    reverseString(num1, strlen(num1));
+    reverseString(num2, strlen(num2));
+    while(*num1 || *num2){
+        n1 = *num1 ? *num1 - '0' : 0;
+        n2 = *num2 ? *num2 - '0' : 0;
+        *cur = (n1 + n2 + carry)%10 + '0';
+        carry = (n1 + n2 + carry)/10;
+        if(*num1){num1++;}
+        if(*num2){num2++;}
+        cur++;
+    }
+    if(carry > 0){
+        *cur = carry + '0';
+        cur++;
+    }
+    reverseString(res, strlen(res));
+    return res;
+}
+```
+
 # strcmp()
 
-```
+```c
 int do_strcmp(const char *src, const char *dst){
     int ret = 0;
     while(!(ret = *src - *dst) && *dst && *src){
@@ -37,7 +130,7 @@ int do_strcmp(const char *src, const char *dst){
 
 # 验证回文串
 
-```
+```c
 bool isPalindrome(char * s){
     const char *beg = s, *end = s;
     while(*end != '\0'){
@@ -67,7 +160,7 @@ bool isPalindrome(char * s){
 # strrev()
 
 将句子中的单词倒置，但不改变单词的内部结构
-```
+```c
 char * reverseWords(char * s){
     if(!s){
         return NULL;
@@ -112,7 +205,7 @@ char * reverseWords(char * s){
 # strlen()
 
 移动指针到字符串的末尾，得出字符串长度，不包括‘\0’
-```
+```c
 int get_strlen(const char *src){
     if(!src){
         return 0;
@@ -127,7 +220,7 @@ int get_strlen(const char *src){
 # strstr()
 
 在主串中寻找子串，找到返回位置。
-```
+```c
 int strStr(char * haystack, char * needle){
     if(!haystack || !needle){
         return 0; //null str
@@ -153,7 +246,7 @@ int strStr(char * haystack, char * needle){
 # strcpy()
 
 复制字符串，以‘\0’结尾
-```
+```c
 char * do_strcpy(char * dst, const char *src){
     if(!dst || !src){
         return NULL;
@@ -169,7 +262,7 @@ char * do_strcpy(char * dst, const char *src){
 # memcpy()
 
 复制任意内容，指定复制的内存大小
-```
+```c
 void *do_memcpy(void *to, void *from, size_t n){
     if(!to || !from){
         return NULL;

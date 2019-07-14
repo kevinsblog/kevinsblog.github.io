@@ -183,5 +183,102 @@ char * addStrings(char * num1, char * num2){
 内存消耗 :7 MB, 在所有 C 提交中击败了95.31%的用户
 ```
 
+# 147. 对链表进行插入排序
+
+对链表进行插入排序。
+
+插入排序的动画演示如上。从第一个元素开始，该链表可以被认为已经部分排序（用黑色表示）。
+每次迭代时，从输入数据中移除一个元素（用红色表示），并原地将其插入到已排好序的链表中。
+
+插入排序算法：
+
+    插入排序是迭代的，每次只移动一个元素，直到所有元素可以形成一个有序的输出列表。
+    每次迭代中，插入排序只从输入数据中移除一个待排序的元素，找到它在序列中适当的位置，并将其插入。
+    重复直到所有输入数据插入完为止。
+
+![](https://upload.wikimedia.org/wikipedia/commons/0/0f/Insertion-sort-example-300px.gif)
+```
+示例 1：
+
+输入: 4->2->1->3
+输出: 1->2->3->4
+
+示例 2：
+
+输入: -1->5->3->4->0
+输出: -1->0->3->4->5
+```
+
+{% highlight c linenos %}
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode* insertionSortList(struct ListNode* head){
+    if(!head || !head->next){
+        return head;
+    }
+    
+    struct ListNode dummy = {INT_MIN, head};
+    struct ListNode *pre = NULL, *cur = head->next, *nxt = NULL;
+    head->next = NULL;
+    while(cur){
+        nxt = cur->next;
+        pre = &dummy;
+        //find a pos for insert
+        while(pre->next && pre->next->val < cur->val){
+            pre = pre->next;
+        }
+        if(pre->next){
+            cur->next = pre->next; //insert
+        }else{
+            cur->next = NULL; //append
+        }
+        pre->next = cur;
+        cur = nxt;
+    }
+    
+    return dummy.next;
+}
+{% endhighlight %}
+测试一下，
+```
+执行结果：
+通过
+显示详情
+执行用时 :52 ms, 在所有 C 提交中击败了64.36% 的用户
+内存消耗 :8.1 MB, 在所有 C 提交中击败了36.96%的用户
+```
+
+# 148. 排序链表
+
+在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。
+
+```
+示例 1:
+
+输入: 4->2->1->3
+输出: 1->2->3->4
+
+示例 2:
+
+输入: -1->5->3->4->0
+输出: -1->0->3->4->5
+```
+
+代码与上题相同，
+测试一下，
+```
+执行结果：
+通过
+显示详情
+执行用时 :1008 ms, 在所有 C 提交中击败了15.38% 的用户
+内存消耗 :9.9 MB, 在所有 C 提交中击败了96.67%的用户
+```
+
+
 {% highlight c linenos %}
 {% endhighlight %}
