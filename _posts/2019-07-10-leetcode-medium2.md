@@ -1,7 +1,7 @@
 ---
 layout: post
 title: LeetCode专题 - 复习题集合(二)
-tags: [Leetcode, C/C++， Golang]
+tags: [Leetcode, C/C++, Golang]
 bigimg: /img/path.jpg
 comments: true
 ---

@@ -9,6 +9,281 @@ comments: true
 * toc
 {:toc}
 
+# strcmp()
+
+```
+int do_strcmp(const char *src, const char *dst){
+    int ret = 0;
+    while(!(ret = *src - *dst) && *dst && *src){
+        src++;
+        dst++;
+    }
+    if(ret < 0){
+        ret = -1;
+    }else if(ret > 0){
+        ret = 1;
+    }else{
+        if(!*dst && !*src){
+        }else if(!*src){
+            ret = 1; //src is longer, thus greater
+        }else{
+            ret = -1;
+        }
+    }
+    
+    return ret;
+}
+```
+
+# 验证回文串
+
+```
+bool isPalindrome(char * s){
+    const char *beg = s, *end = s;
+    while(*end != '\0'){
+        end++;
+    }
+    end--; //move to the last character
+    
+    while(beg < end){
+        //skip no alp or num char
+        while(*beg != '\0' && !isalnum(*beg)){beg++;}
+        while(end > beg && !isalnum(*end)){end--;}
+        if(end <= beg){
+            break;
+        }
+        //check if ok
+        if(*beg - *end == 0 || 
+          (isalpha(*beg) && isalpha(*end) && abs(*beg - *end) == 'a' - 'A' )){      
+        }else{return false;}
+        beg++;
+        end--;
+    }
+    
+    return true;
+}
+```
+
+# strrev()
+
+将句子中的单词倒置，但不改变单词的内部结构
+```
+char * reverseWords(char * s){
+    if(!s){
+        return NULL;
+    }
+    
+    char *beg = s, *end = s, *cur = s;
+    char tmp;
+    while(*cur++){
+        if(isspace(*cur) || !*cur){
+            end = cur - 1;
+            //reverse each word
+            while(beg < end){
+                tmp = *beg;
+                *beg = *end;
+                *end = tmp;
+                beg++;
+                end--;
+            }
+            beg = end = cur + 1;
+        }
+    }
+    
+    beg = s;
+    end = cur - 2;
+    //reverse the whole sentence
+    while(beg < end){
+        tmp = *beg;
+        *beg = *end;
+        *end = tmp;
+        beg++;
+        end--;        
+    }
+
+    return s;
+}
+```
+```
+输入 "the sky is blue"
+输出 "blue is sky the"
+```
+
+# strlen()
+
+移动指针到字符串的末尾，得出字符串长度，不包括‘\0’
+```
+int get_strlen(const char *src){
+    if(!src){
+        return 0;
+    }
+
+    const char *tail = src;
+    while(*tail++ != '\0'); //指向‘\0’之后一个位置
+    return tail - src - 1; //不包括'\0'
+}
+```
+
+# strstr()
+
+在主串中寻找子串，找到返回位置。
+```
+int strStr(char * haystack, char * needle){
+    if(!haystack || !needle){
+        return 0; //null str
+    }
+    if(!*haystack && !*needle){
+        return 0; //empty str
+    }
+    const char *ph = haystack, *pn = needle, *start = NULL;
+    while(*ph){
+        start = ph; //记录主串开始扫描的位置
+        pn = needle;
+        do{
+            if(!*pn){ //子串扫描完成，找到答案
+                return start - haystack;
+            }
+        }while(*pn++ == *ph++); //比较，推进子串和主串
+        ph = start+1;
+    }
+    
+    return -1;
+```
+
+# strcpy()
+
+复制字符串，以‘\0’结尾
+```
+char * do_strcpy(char * dst, const char *src){
+    if(!dst || !src){
+        return NULL;
+    }
+
+    char *dst_cp = dst;
+    //先复制，后移动指针，复制完‘\0’后退出循环
+    while((*dst++ = *src++) != '\0'){}
+    return dst_cp;
+}
+```
+
+# memcpy()
+
+复制任意内容，指定复制的内存大小
+```
+void *do_memcpy(void *to, void *from, size_t n){
+    if(!to || !from){
+        return NULL;
+    }
+
+    char *to_cp = (char*)to;
+    char *from_cp = (char*)from; //指针运算前先转成char*
+    while(n--){
+        *to_cp++ = *from_cp++;
+    }
+    return to;
+}
+```
+
+# 运算符优先级
+
+优先级 	运算符 	结合律
+1 	后缀运算符：[]    ()    ·    ->    ++    --(类型名称){列表} 	从左到右
+2 	一元运算符：++    --    !    ~    +    -    *    &    sizeof_Alignof 	从右到左
+3 	类型转换运算符：(类型名称) 	从右到左
+4 	乘除法运算符：*    /    % 	从左到右
+5 	加减法运算符：+    - 	从左到右
+6 	移位运算符：<<    >> 	从左到右
+7 	关系运算符：<<=    >>= 	从左到右
+8 	相等运算符：==    != 	从左到右
+9 	位运算符 AND：& 	从左到右
+10 	位运算符 XOR：^ 	从左到右
+11 	位运算符 OR：| 	从左到右
+12 	逻辑运算符 AND：&& 	从左到右
+13 	逻辑运算符 OR：|| 	从左到右
+14 	条件运算符：?: 	从右到左
+15 	赋值运算符：
+     =         +=        -=       *=       /=      %=       &=       ^=      |=   
+   <<=      >>= 	从右到左
+16 	逗号运算符：， 	从左到右
+
+# const的作用
+
+* 定义常量，替代宏
+* const &，替代传值
+* const void *，返回不能修改值得指针
+* 修饰成员函数，避免其修改数据
+
+# static的作用
+
+* 声明一个块作用域内的持续性变量，静态存储方式，改变变量生存期
+* 声明只在文件内可见的变量或函数，限制作用域
+* 声明一个类实例共享的成员变量或函数，::
+
+# sizeof结构体
+
+
+
+# 指针数组与数组指针
+
+指针数组是是一个数组，数组中存放的都是同一个类型的指针。
+```
+int *a[10];
+```
+数组a中存放了10个int*型的变量。
+
+数组指针是一个指针，指向一个数组。
+代码
+```c
+    //char *str[] = {"Welcom", "to", "Fortemedia", "Nanjing"};
+    //A, B, C, D
+    const char *str[] = {"Welcom", "to", "Fortemedia", "Nanjing"};
+    const char **p = str + 1; //p : address of "to", B
+    str[0] = (*p++)+2; //NULL, p: C, 
+    str[1] = *(p+1); //"Nanjing", D
+    str[2] = p[1] + 3; //"jing", D[3]
+    str[3] = p[0] + (str[2] - str[1]); // "g", p[0] + 3
+
+    printf("str[0]: %s, str[1]: %s, str[2]: %s, str[3]: %s \n",
+        str[0], str[1], str[2], str[3]);
+```
+运行结果，
+```
+str[0]: , str[1]: Nanjing, str[2]: jing, str[3]: g
+```
+
+# 函数指针与指针函数
+
+指针函数是一个函数，返回类型为某一类型的指针。
+
+每一个函数，都有一个入口地址，函数指针是指向函数的这一入口地址的。
+
+```c
+    float score[] = {10, 20, 30 ,40};
+    int (*p)(int, int);
+    float *q = ret_ele_at(score+1, 1); //30.0 //指针函数
+    p = ret_max;
+    int a = (*p)(1, 2); //2 //函数指针
+    printf("a: %d, *q: %f\n", a, *q);
+```
+运行结果
+```
+a: 2, *q: 30.000000
+```
+综上，
+```
+    int* a[10]; //指针数组，类型为指针的数组
+    int *a = {20, 30, 40}; //数组指针，指向数组的指针
+    void (*fn)(int *, int); //函数指针，指向函数的指针
+    int (*fnA[10])(int *, int); //函数指针数组，指向函数的指针数组
+    int* fn(int); //返回指针的函数
+    const int *p; //指向常量的指针，指针指向的值不能修改
+    int* const p; //常量指针，指针的指向不能修改
+
+    typedef int (*pfun)(int, int);
+    ...
+    pfun p = fun;
+```
+
 # 读写文件
 
 读写文件的过程
