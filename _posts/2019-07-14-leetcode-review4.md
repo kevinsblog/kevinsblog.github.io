@@ -279,6 +279,108 @@ struct ListNode* insertionSortList(struct ListNode* head){
 内存消耗 :9.9 MB, 在所有 C 提交中击败了96.67%的用户
 ```
 
+# 709. 转换成小写字母
+
+实现函数 ToLowerCase()，该函数接收一个字符串参数 str，并将该字符串中的大写字母转换成小写字母，之后返回新的字符串。
+
+```
+示例 1：
+
+输入: "Hello"
+输出: "hello"
+
+示例 2：
+
+输入: "here"
+输出: "here"
+
+示例 3：
+
+输入: "LOVELY"
+输出: "lovely"
+```
+
+{% highlight c linenos %}
+char * toLowerCase(char * str){
+    if(!str || !*str){
+        return str;
+    }
+    char *ret = str;
+    while(*str){
+        if(*str >= 'A' && *str <= 'Z'){
+            *str -= 'A' - 'a';
+        }
+        str++;
+    }
+    return ret;
+}
+{% endhighlight %}
+测试一下，
+```
+执行结果：
+通过
+显示详情
+执行用时 :4 ms, 在所有 C 提交中击败了83.76% 的用户
+内存消耗 :6.8 MB, 在所有 C 提交中击败了5.57%的用户
+```
+
+# 557. 反转字符串中的单词 III
+
+给定一个字符串，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。
+
+```
+示例 1:
+
+输入: "Let's take LeetCode contest"
+输出: "s'teL ekat edoCteeL tsetnoc" 
+```
+
+注意：在字符串中，每个单词由单个空格分隔，并且字符串中不会有任何额外的空格。
+
+{% highlight c linenos %}
+char * reverseWords(char * s){
+    if(!s || !*s){
+        return s;
+    }
+    
+    char *beg = NULL, *end = NULL, *cur = s;
+    char tmp;
+    while(*cur){
+        beg = cur;
+        //find the head of a word
+        while(*beg && isspace(*beg)){
+            beg++;
+        }
+        
+        //find the tail of a word
+        end = beg;
+        while(*end && !isspace(*end)){
+            end++;
+        }
+        end--;
+        
+        //reverse the word
+        cur = end + 1;
+        while(beg < end){
+            tmp = *beg;
+            *beg = *end;
+            *end = tmp;
+            beg++;
+            end--;
+        }
+    }
+    
+    return s;
+}
+{% endhighlight %}
+测试一下，
+```
+执行结果：
+通过
+显示详情
+执行用时 :12 ms, 在所有 C 提交中击败了86.12% 的用户
+内存消耗 :8.3 MB, 在所有 C 提交中击败了42.16%的用户
+```
 
 {% highlight c linenos %}
 {% endhighlight %}
