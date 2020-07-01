@@ -39,7 +39,7 @@ comments: true
 
 智慧园区场景中，边缘计算主要功能包括海量网络联接与管理、实时数据采集与处理和本地业务自治（智能协同应用离线后，能够实现本地业务自治，网络联接恢复后，完成数据与状态同步。）
 
-![图1 智慧园区边缘计算分层架构](https://s1.51cto.com/images/20180511/1526040463983581.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=)
+![图1 智慧园区边缘计算分层架构](https://github.com/kevinsblog/kevinsblog.github.io/blob/master/img/1593610899107.jpg)
 
 ## 云游戏
 
